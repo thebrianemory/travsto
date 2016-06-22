@@ -3,7 +3,11 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
-  validates :email, presence: true, uniqueness: true
-  validates :username, presence: true, uniqueness: true
-  validates :name, presence: true
+  validates_presence_of :first_name, :last_name, :email, :username
+  validates_uniqueness_of :username, :email
+  validates :username, length: 6..15
+
+  def name
+    [first_name, last_name]. join(' ')
+  end
 end
