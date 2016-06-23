@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
   validates_presence_of :first_name, :last_name, :email, :username
   validates_uniqueness_of :username, :email
   validates :username, length: 6..15
+  has_many :trips, dependent: :destroy
 
   def name
     [first_name, last_name]. join(' ')
