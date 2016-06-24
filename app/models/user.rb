@@ -8,6 +8,8 @@ class User < ActiveRecord::Base
   validates :username, length: 6..15
   has_many :trips, dependent: :destroy
   has_many :reviews, dependent: :destroy
+  has_many :comments
+  enum role: [:user, :admin]
 
   def name
     [first_name, last_name]. join(' ')

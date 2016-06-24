@@ -3,4 +3,5 @@ class Trip < ActiveRecord::Base
   validates_presence_of :title, :description
   validates :title, length: 5..50
   validates :description, length: { minimum: 100 }
+  has_many :comments
 end
