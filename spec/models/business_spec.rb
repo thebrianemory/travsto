@@ -11,10 +11,8 @@ RSpec.describe Business, type: :model do
     it "returns a business' average rating" do
       business = create(:business)
       user = create(:user)
-      review1 = create(:review, business_id: business.id, user_id: user.id)
-      review2 = create(:review, rating: 2, business_id: business.id, user_id: user.id)
-      business.reviews << review1
-      business.reviews << review2
+      business.reviews << create(:review, business_id: business.id, user_id: user.id)
+      business.reviews << create(:review, rating: 2, business_id: business.id, user_id: user.id)
       expect(business.average_review_rating).to eq 3
     end
   end
