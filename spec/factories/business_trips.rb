@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :business_trip do
-    business nil
-    trip nil
+    business 1
+    trip 1
   end
 end
