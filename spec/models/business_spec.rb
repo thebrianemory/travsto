@@ -23,11 +23,11 @@ RSpec.describe Business, type: :model do
 
   describe "associations" do
     before(:each) do
-      @user = build(:user)
+      @user = create(:user)
       @category = create(:category)
-      @business = build(:business, category_id: @category.id)
-      @review = build(:review, user_id: @user.id, business_id: @business.id)
-      @trip = build(:trip, user_id: @user.id)
+      @business = create(:business, category_id: @category.id)
+      @review = create(:review, user_id: @user.id, business_id: @business.id)
+      @trip = create(:trip, user_id: @user.id)
     end
     it "belongs to a category" do
       expect(@business.category).to eq(@category)
