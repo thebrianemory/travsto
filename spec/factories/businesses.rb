@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :business do
-    name "Weemo's Pizzeria"
+    name { Faker::Company.name }
     category_id 1
   end
 end

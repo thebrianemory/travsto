@@ -9,7 +9,8 @@ RSpec.describe Business, type: :model do
       expect(build(:business)).to be_valid
     end
     it "returns a business' average rating" do
-      business = create(:business)
+      category = create(:category)
+      business = create(:business, category_id: category.id)
       user = create(:user)
       business.reviews << create(:review, business_id: business.id, user_id: user.id)
       business.reviews << create(:review, rating: 2, business_id: business.id, user_id: user.id)
@@ -33,8 +34,9 @@ RSpec.describe Business, type: :model do
 
   describe "information cannot already be in use" do
     it "is invalid with a duplicate name" do
-      business1 = create(:business)
-      business2 = build(:business)
+      category = create(:category)
+      business1 = create(:business, name: "Weemo's Pizzeria", category_id: category.id)
+      business2 = build(:business, name: "Weemo's Pizzeria", category_id: category.id)
       business2.valid?
       expect(business2.errors[:name]).to include("has already been taken")
     end

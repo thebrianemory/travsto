@@ -1,6 +1,5 @@
 FactoryGirl.define do
   factory :category do
-    name "MyString"
-    business nil
+    name { Faker::StarWars.specie }
   end
 end
