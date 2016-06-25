@@ -11,10 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160624184748) do
+ActiveRecord::Schema.define(version: 20160624235756) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "business_trips", force: :cascade do |t|
+    t.integer  "business_id"
+    t.integer  "trip_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "business_trips", ["business_id"], name: "index_business_trips_on_business_id", using: :btree
+  add_index "business_trips", ["trip_id"], name: "index_business_trips_on_trip_id", using: :btree
 
   create_table "businesses", force: :cascade do |t|
     t.string   "name"
@@ -22,6 +32,8 @@ ActiveRecord::Schema.define(version: 20160624184748) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
+
+  add_index "businesses", ["category_id"], name: "index_businesses_on_category_id", using: :btree
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -84,6 +96,9 @@ ActiveRecord::Schema.define(version: 20160624184748) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "business_trips", "businesses"
+  add_foreign_key "business_trips", "trips"
+  add_foreign_key "businesses", "categories"
   add_foreign_key "comments", "trips"
   add_foreign_key "comments", "users"
   add_foreign_key "reviews", "businesses"

@@ -13,6 +13,7 @@ RSpec.describe User, type: :model do
       user = build(:user, first_name: 'John', last_name: 'Doe')
       expect(user.name).to eq 'John Doe'
     end
+    it ""
   end
 
   describe "has a valid username length" do
