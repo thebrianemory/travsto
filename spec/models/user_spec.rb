@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe User, type: :model do
   describe "misc" do
     before(:each) do
-      @user = build(:user)
+      @user = create(:user)
     end
     it "has a valid factory" do
       expect(@user).to be_valid
@@ -20,12 +20,12 @@ RSpec.describe User, type: :model do
 
   describe "associations" do
     before(:each) do
-      @user = build(:user)
-      @category = build(:category)
-      @business = build(:business, category_id: @category.id)
-      @review = build(:review, user_id: @user.id, business_id: @business.id)
-      @trip = build(:trip, user_id: @user.id)
-      @comment = build(:comment, user_id: @user.id, trip_id: @trip.id)
+      @user = create(:user)
+      @category = create(:category)
+      @business = create(:business, category_id: @category.id)
+      @review = create(:review, user_id: @user.id, business_id: @business.id)
+      @trip = create(:trip, user_id: @user.id)
+      @comment = create(:comment, user_id: @user.id, trip_id: @trip.id)
     end
     it "has many trips" do
       @user.trips << @trip
@@ -46,7 +46,7 @@ RSpec.describe User, type: :model do
 
   describe "has a valid username length" do
     before(:each) do
-      @user = build(:user)
+      @user = create(:user)
     end
     it "has a username between 6 and 15 characters" do
       @user.username = 'bobbyjohnson'
