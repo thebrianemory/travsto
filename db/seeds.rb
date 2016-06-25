@@ -11,21 +11,21 @@
 # User.create(
 #   first_name: "Prince",
 #   last_name: "Thor",
-#   email: Faker::Internet.safe_email("mighty.thor"),
+#   email: "mighty.thor@example.com",
 #   username: "mightythor",
 #   password: 'password'
 # )
 # User.create(
 #   first_name: "Steve",
 #   last_name: "Rogers",
-#   email: Faker::Internet.safe_email("steve.rogers"),
+#   email: "steve.rogers@example.com",
 #   username: "steverogers",
 #   password: 'password'
 # )
 # User.create(
 #   first_name: "Tony",
 #   last_name: "Stark",
-#   email: Faker::Internet.safe_email("tony.stark"),
+#   email: "tony.stark@example.com",
 #   username: "tonystark",
 #   password: 'password'
 # )

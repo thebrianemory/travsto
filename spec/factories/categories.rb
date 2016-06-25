@@ -1,5 +1,5 @@
 FactoryGirl.define do
   factory :category do
-    name { Faker::StarWars.specie }
+    name "Restaurant"
   end
 end
