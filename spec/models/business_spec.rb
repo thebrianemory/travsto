@@ -22,6 +22,29 @@ RSpec.describe Business, type: :model do
     end
   end
 
+  describe "associations" do
+    before(:each) do
+      @user = build(:user)
+      @category = create(:category)
+      @business = build(:business, category_id: @category.id)
+      @review = build(:review, user_id: @user.id, business_id: @business.id)
+      @trip = build(:trip, user_id: @user.id)
+    end
+    it "belongs to a category" do
+      expect(@business.category).to eq(@category)
+    end
+    it "has many reviews" do
+      @business.reviews << @review
+      @business.save
+      expect(@business.reviews.count).to eq 1
+    end
+    it "has many trips" do
+      @business.trips << @trip
+      @business.save
+      expect(@business.trips.count).to eq 1
+    end
+  end
+
   describe "information cannot be left blank" do
     before(:each) do
       @category = create(:category)
