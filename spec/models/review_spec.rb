@@ -2,10 +2,9 @@ require 'rails_helper'
 
 RSpec.describe Review, type: :model do
   before(:each) do
-    @user = create(:user)
-    @category = create(:category)
-    @business = create(:business, category_id: @category.id)
     @review = create(:review, user_id: @user.id, business_id: @business.id)
+    @user = User.find_by_id(@review.user.id)
+    @business = Business.find_by_id(@review.business.id)
   end
   describe "misc" do
     it "has a valid factory" do

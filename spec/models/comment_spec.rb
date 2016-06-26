@@ -2,11 +2,11 @@ require 'rails_helper'
 
 RSpec.describe Comment, type: :model do
   before(:each) do
-    @user = create(:user)
     @category = create(:category)
     @business = create(:business, category_id: @category.id)
-    @trip = create(:trip, user_id: @user.id)
-    @comment = create(:comment, user_id: @user.id, trip_id: @trip.id)
+    @comment = create(:comment)
+    @user = User.find_by_id(@comment.user.id)
+    @trip = Trip.find_by_id(@comment.trip.id)
   end
 
   describe "misc" do
