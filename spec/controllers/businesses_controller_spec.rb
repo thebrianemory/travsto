@@ -7,24 +7,12 @@ RSpec.describe BusinessesController, type: :controller do
   end
   login_user
 
-  # describe 'Users access' do
-  #   it 'allows the user to view the business index' do
-  #     get :index
-  #     expect(response).to render_template :index
-  #   end
-  #   it 'allows the user to view a business page' do
-  #     get :show, id: @business
-  #     expect(response).to render_template :show
-  #   end
-  #   it 'redirects to sign in page if not signed in' do
-  #     sign_out :user
-  #     get :show, id: @business
-  #     expect(response).to redirect_to new_user_session_path
-  #   end
-  # end
-
   describe 'GET #index' do
-    it 'populates an array of all businesses'
+    it 'populates an array of all businesses' do
+      business2 = create(:business, category_id: @category.id)
+      get :index
+      expect(assigns(:businesses)).to match_array([@business, business2])
+    end
     it 'renders the :index template' do
       get :index
       expect(response).to render_template :index
@@ -32,7 +20,10 @@ RSpec.describe BusinessesController, type: :controller do
   end
 
   describe 'GET #show' do
-    it 'assigns the requested business to @business'
+    it 'assigns the requested business to @business' do
+      get :show, id: @business
+      expect(assigns(:business)).to eq @business
+    end
     it 'renders the :show template' do
       get :show, id: @business
       expect(response).to render_template :show
@@ -40,12 +31,18 @@ RSpec.describe BusinessesController, type: :controller do
   end
 
   describe 'GET #new' do
-    it 'assigns a new business to @business'
+    # it 'assigns a new business to @business' do
+    #   @business = build(:business)
+    #   expect(assigns(:business)).to eq @business
+    # end
     it 'renders the :new template'
   end
 
   describe 'GET #edit' do
-    it 'assigns the requested business to @business'
+    # it 'assigns the requested business to @business' do
+    #   get :edit, id: @business
+    #   expect(assigns(:business)).to eq @business
+    # end
     it 'renders the :edit template'
   end
 
