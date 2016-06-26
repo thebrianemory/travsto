@@ -1,8 +1,7 @@
 FactoryGirl.define do
   factory :business do
     sequence(:name) { |n| "Weemo's Pizzeria#{n}" }
-    category_id 1
-
+    association :category, factory: :category, strategy: :create
     factory :invalid_business do
       name nil
     end
