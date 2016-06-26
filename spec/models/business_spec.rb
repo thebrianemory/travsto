@@ -44,8 +44,7 @@ RSpec.describe Business, type: :model do
 
   describe "information cannot be left blank" do
     before(:each) do
-      @category = create(:category)
-      @business = build(:business, category_id: @category.id)
+      @business = build(:business)
     end
     it "is invalid without a name" do
       @business.name = nil
@@ -62,11 +61,10 @@ RSpec.describe Business, type: :model do
 
   describe "information cannot already be in use" do
     before(:each) do
-      @category = create(:category)
-      @business1 = create(:business, name: "Weemo's Pizzeria", category_id: @category.id)
+      @business1 = create(:business, name: "Weemo's Pizzeria")
     end
     it "is invalid with a duplicate name" do
-      business2 = build(:business, name: "Weemo's Pizzeria", category_id: @category.id)
+      business2 = build(:business, name: "Weemo's Pizzeria")
       business2.valid?
       expect(business2.errors[:name]).to include("has already been taken")
     end
