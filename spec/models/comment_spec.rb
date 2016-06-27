@@ -2,8 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Comment, type: :model do
   before(:each) do
-    @category = create(:category)
-    @business = create(:business, category_id: @category.id)
+    @business = create(:business)
     @comment = create(:comment)
     @user = User.find_by_id(@comment.user.id)
     @trip = Trip.find_by_id(@comment.trip.id)
