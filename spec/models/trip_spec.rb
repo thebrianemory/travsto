@@ -2,10 +2,9 @@ require 'rails_helper'
 
 RSpec.describe Trip, type: :model do
   before(:each) do
-    @user = create(:user)
-    @category = create(:category)
-    @business = create(:business, category_id: @category.id)
-    @trip = create(:trip, user_id: @user.id)
+    @business = create(:business)
+    @trip = create(:trip)
+    @user = User.find_by_id(@trip.user.id)
     @comment = create(:comment, user_id: @user.id, trip_id: @trip.id)
   end
 
@@ -64,12 +63,12 @@ RSpec.describe Trip, type: :model do
 
   describe "has a valid desciption length" do
     it "has a description longer than 100 characters" do
-      trip = build(:trip, description: 'I took a trip to a place and did a bunch of things so that was cool I took a trip to a place and did a bunch of things so that was cool')
-      expect(trip).to be_valid
+      @trip.description = 'I took a trip to a place and did a bunch of things so that was cool I took a trip to a place and did a bunch of things so that was cool'
+      expect(@trip).to be_valid
     end
     it "it cannot have a description less than 100 characters" do
-      trip = build(:trip, description: 'I took a trip to a place and did a bunch of things so that was cool')
-      expect(trip).to_not be_valid
+      @trip.description = 'I took a trip to a place and did a bunch of things so that was cool'
+      expect(@trip).to_not be_valid
     end
   end
 end
