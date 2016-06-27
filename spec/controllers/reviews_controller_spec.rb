@@ -1,6 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe ReviewsController, type: :controller do
+  before(:each) do
+  end
+  login_user
+
   describe 'GET #index' do
     it 'populates an array of all businesses'
     it 'renders the :index template'
@@ -23,6 +27,8 @@ RSpec.describe ReviewsController, type: :controller do
 
   describe 'POST #create' do
     context 'with valid attributes' do
+      before(:each) do
+      end
       it 'saves the new business in the database'
       it 'redirects to business#show'
     end
@@ -35,18 +41,19 @@ RSpec.describe ReviewsController, type: :controller do
 
   describe 'PATCH #update' do
     context 'with valid attributes' do
-      it 'updates the business in the database'
-      it 'redirects to the business'
+      it "locates the requested @business"
+      it "changes @business' attributes"
+      it "redirectes to the updated business"
     end
 
     context 'with invalid attributes' do
-      it 'does not update the business'
+      it "does not change the business' attributes"
       it 're-renders the :edit template'
     end
   end
 
   describe 'DELETE #destroy' do
-    it 'deletes the business from the database'
+    it 'deletes the business'
     it 'redirects to businesses#index'
   end
 end
