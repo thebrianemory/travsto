@@ -71,11 +71,11 @@ RSpec.describe BusinessesController, type: :controller do
     context 'with invalid attributes' do
       it 'does not save the new business in the database' do
         expect {
-          post :create, business: attributes_for(:business)
+          post :create, business: attributes_for(:invalid_business)
         }.not_to change(Business, :count)
       end
       it 're-renders the :new template' do
-        post :create, business: attributes_for(:business)
+        post :create, business: attributes_for(:invalid_business)
         expect(response).to render_template :new
       end
     end
@@ -101,7 +101,7 @@ RSpec.describe BusinessesController, type: :controller do
     context 'with invalid attributes' do
       it "does not change the business' attributes" do
         biz_name = @business.name
-        patch :update, id: @business, business: attributes_for(:business, name: nil)
+        patch :update, id: @business, business: attributes_for(:invalid_business)
         @business.reload
         expect(@business.name).to eq(biz_name)
       end
