@@ -1,5 +1,6 @@
 class CommentsController < ApplicationController
   before_action :set_comment, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
 
   def index
     redirect_to root_url
@@ -33,8 +34,9 @@ class CommentsController < ApplicationController
   end
 
   def destroy
+    trip = Trip.find_by_id(@comment.trip_id)
     @comment.destroy
-    redirect_to comments_path
+    redirect_to trip_path(trip)
   end
 
   private
@@ -44,9 +46,5 @@ class CommentsController < ApplicationController
 
   def comment_params
     params.require(:comment).permit(:content, :user_id, :trip_id)
-  end
-
-  def verify_is_admin
-    (current_user.nil?) ? redirect_to(root_path) : (redirect_to(root_path) unless current_user.admin?)
   end
 end

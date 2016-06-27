@@ -6,6 +6,7 @@ RSpec.describe CommentsController, type: :controller do
     @user = User.find_by_id(@comment.user_id)
     @trip = Trip.find_by_id(@comment.trip_id)
   end
+  login_user
 
   describe 'GET #index' do
     it 'redirects to the root url' do
@@ -114,9 +115,10 @@ RSpec.describe CommentsController, type: :controller do
         delete :destroy, id: @comment
       }.to change(Comment, :count).by(-1)
     end
-    it 'redirects to comments#index' do
+    it "redirects to comment's trip" do
+      trip = Trip.find_by_id(@comment.trip_id)
       delete :destroy, id: @comment
-      expect(response).to redirect_to comments_path
+      expect(response).to redirect_to trip_path(trip)
     end
   end
 end

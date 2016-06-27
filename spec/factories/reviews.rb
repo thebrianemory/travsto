@@ -4,5 +4,8 @@ FactoryGirl.define do
     rating 4
     association :user, factory: :user, strategy: :create
     association :business, factory: :business, strategy: :create
+    factory :invalid_review do
+      rating nil
+    end
   end
 end
