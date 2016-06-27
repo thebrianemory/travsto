@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   resources :reviews
   resources :businesses
+  resources :categories
   resources :trips
   devise_for :users
   resources :users, only: [:show]
