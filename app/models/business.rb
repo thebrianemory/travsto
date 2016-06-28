@@ -7,12 +7,10 @@ class Business < ActiveRecord::Base
   validates_presence_of :name, :category_id
   validates_uniqueness_of :name
 
+  extend FriendlyId
+  friendly_id :name, use: :slugged
+
   def average_review_rating
     reviews.average(:rating)
-  end
-
-  def slug
-    self.name.gsub!(/['`"]/,"")
-    self.name.gsub(/\s*[^A-Za-z0-9\.\-]\s*/, '-').downcase
   end
 end

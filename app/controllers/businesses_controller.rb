@@ -40,7 +40,7 @@ class BusinessesController < ApplicationController
 
   private
   def set_business
-    @business = Business.find(params[:id])
+    @business = Business.friendly.find(params[:id])
   end
 
   def business_params
