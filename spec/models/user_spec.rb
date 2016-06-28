@@ -44,7 +44,7 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe "has a valid username length" do
+  describe "has a valid username" do
     before(:each) do
       @user = create(:user)
     end
@@ -60,6 +60,14 @@ RSpec.describe User, type: :model do
       @user.username = 'bobbyjohnson1234'
       expect(@user).to_not be_valid
     end
+      it 'cannot have spaces' do
+        @user.username = 'bob johnson'
+        expect(@user).to_not be_valid
+      end
+      it 'cannot have special characters' do
+        @user.username = 'bob$%johnson'
+        expect(@user).to_not be_valid
+      end
   end
 
   describe "information cannot be left blank" do
