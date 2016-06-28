@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   resources :comments
   resources :trips
   devise_for :users, :path => '', :path_names => { :sign_in => 'login', :sign_out => 'logout', :sign_up => 'signup' }
-  resources :users, only: [:show] #, path: ''
+  resources :users, only: [:show], path: ''
   root 'welcome#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
