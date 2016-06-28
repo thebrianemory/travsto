@@ -1,11 +1,11 @@
 Rails.application.routes.draw do
   resources :reviews
-  resources :businesses
+  resources :businesses, path: 'biz'
   resources :categories
   resources :comments
   resources :trips
   devise_for :users, :path => '', :path_names => { :sign_in => 'login', :sign_out => 'logout', :sign_up => 'signup' }
-  resources :users, only: [:show]
+  resources :users, only: [:show], path: ''
   root 'welcome#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -11,4 +11,8 @@ class Trip < ActiveRecord::Base
     self.title.gsub!(/['`"]/,"")
     self.title.gsub(/\s*[^A-Za-z0-9\.\-]\s*/, '-').downcase
   end
+
+  def to_param
+    "#{id}-#{title}".parameterize
+  end
 end
