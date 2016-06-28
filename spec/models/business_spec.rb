@@ -42,6 +42,13 @@ RSpec.describe Business, type: :model do
     end
   end
 
+  describe "name is slugifiable" do
+    it 'turns the its name into a slug' do
+      business = create(:business, name: "Weemo's Pizzeria")
+      expect(business.slug).to eq("weemos-pizzeria")
+    end
+  end
+
   describe "information cannot be left blank" do
     before(:each) do
       @business = build(:business)

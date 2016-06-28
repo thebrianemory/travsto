@@ -10,4 +10,9 @@ class Business < ActiveRecord::Base
   def average_review_rating
     reviews.average(:rating)
   end
+
+  def slug
+    self.name.gsub!(/['`"]/,"")
+    self.name.gsub(/\s*[^A-Za-z0-9\.\-]\s*/, '-').downcase
+  end
 end
