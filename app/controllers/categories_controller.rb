@@ -1,5 +1,5 @@
 class CategoriesController < ApplicationController
-  before_action :verify_is_admin
+  before_action :verify_is_admin, except: [:index, :show]
   before_action :set_category, only: [:show, :edit, :update, :destroy]
 
   def index
