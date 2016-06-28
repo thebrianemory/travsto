@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   devise_for :users, :path => '', :path_names => { :sign_in => 'login', :sign_out => 'logout', :sign_up => 'signup' }
   resources :users, only: [:show], path: ''
   get '/:username/trips' => 'users#trips'
+  get '/:username/reviews' => 'users#reviews'
   resources :trips
   root 'welcome#index'
   # The priority is based upon order of creation: first created -> highest priority.

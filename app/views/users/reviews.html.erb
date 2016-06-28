@@ -1,0 +1,6 @@
+<h2>User's reviews</h2>
+<% @my_reviews.each do |review| %>
+  <ul>
+    <li><%= link_to review.business.name, business_path(review.business) %></li>
+  </ul>
+<% end %>

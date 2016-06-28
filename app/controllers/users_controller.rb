@@ -7,4 +7,9 @@ class UsersController < ApplicationController
     @user = User.friendly.find(params[:username])
     @my_trips = @user.trips
   end
+
+  def reviews
+    @user = User.friendly.find(params[:username])
+    @my_reviews = @user.reviews
+  end
 end
