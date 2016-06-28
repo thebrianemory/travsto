@@ -17,6 +17,6 @@ class Business < ActiveRecord::Base
   end
 
   def to_param
-    "#{id}-#{username}".parameterize
+    "#{id}-#{name}".parameterize
   end
 end
