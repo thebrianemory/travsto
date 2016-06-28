@@ -7,8 +7,6 @@ class Trip < ActiveRecord::Base
   validates :title, length: 5..50
   validates :description, length: { minimum: 100 }
 
-  def slug
-    self.title.gsub!(/['`"]/,"")
-    self.title.gsub(/\s*[^A-Za-z0-9\.\-]\s*/, '-').downcase
-  end
+  extend FriendlyId
+  friendly_id :title, use: :slugged
 end

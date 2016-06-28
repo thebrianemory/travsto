@@ -11,6 +11,9 @@ class User < ActiveRecord::Base
   has_many :comments
   enum role: [:user, :admin]
 
+  extend FriendlyId
+  friendly_id :username, use: :slugged
+
   def name
     [first_name, last_name]. join(' ')
   end

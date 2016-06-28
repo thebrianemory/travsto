@@ -64,7 +64,7 @@ RSpec.describe Trip, type: :model do
   describe "title is slugifiable" do
     it 'turns the its title into a slug' do
       trip = create(:trip, title: "this isn't my Title FOR my trip")
-      expect(trip.slug).to eq("this-isnt-my-title-for-my-trip")
+      expect(trip.slug).to eq("this-isn-t-my-title-for-my-trip")
     end
   end
 
