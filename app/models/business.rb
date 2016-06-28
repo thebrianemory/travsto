@@ -15,8 +15,4 @@ class Business < ActiveRecord::Base
     self.name.gsub!(/['`"]/,"")
     self.name.gsub(/\s*[^A-Za-z0-9\.\-]\s*/, '-').downcase
   end
-
-  def to_param
-    "#{id}-#{name}".parameterize
-  end
 end

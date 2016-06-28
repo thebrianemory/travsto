@@ -1,1 +1,6 @@
 <h1>Business Index</h1>
+<% @businesses.each do |biz| %>
+  <ul>
+    <li><%= link_to biz.name, business_path(biz) %></li>
+  </ul>
+<% end %>
