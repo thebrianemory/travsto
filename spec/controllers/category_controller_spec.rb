@@ -6,7 +6,7 @@ RSpec.describe CategoriesController, type: :controller do
       @category = create(:category)
     end
 
-    describe 'GET #index' do # Accessible by anyone
+    describe 'GET #index' do
       it 'populates an array of all categories' do
         category2 = create(:category)
         get :index
@@ -18,7 +18,7 @@ RSpec.describe CategoriesController, type: :controller do
       end
     end
 
-    describe 'GET #show' do # Accessible by anyone
+    describe 'GET #show' do
       before(:each) do
         sign_out :user
       end
