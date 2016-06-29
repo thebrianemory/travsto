@@ -1,0 +1,6 @@
+<h2>Comment index page</h2>
+<% @comments.each do |comment| %>
+  <ul>
+    <li><%= link_to comment.content, comment_path(comment) %></li>
+  </ul>
+<% end %>

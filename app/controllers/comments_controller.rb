@@ -1,20 +1,24 @@
 class CommentsController < ApplicationController
   before_action :set_comment, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!
+  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   def index
-    redirect_to root_url
+    @comments = Comment.all
+    authorize Comment
   end
 
   def show
+    authorize @comment
   end
 
   def new
     @comment = Comment.new
+    authorize @comment
   end
 
   def create
-    @comment = Comment.create(comment_params)
+    @comment = Comment.new(comment_params)
+    authorize @comment
     if @comment.save
       redirect_to trip_path(@comment.trip_id)
     else
@@ -23,9 +27,11 @@ class CommentsController < ApplicationController
   end
 
   def edit
+    authorize @comment
   end
 
   def update
+    authorize @comment
     if @comment.update(comment_params)
       redirect_to trip_path(@comment.trip_id)
     else
@@ -34,6 +40,7 @@ class CommentsController < ApplicationController
   end
 
   def destroy
+    authorize @comment
     trip = Trip.find_by_id(@comment.trip_id)
     @comment.destroy
     redirect_to trip_path(trip)
