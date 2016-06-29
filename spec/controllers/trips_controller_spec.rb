@@ -41,9 +41,14 @@ RSpec.describe TripsController, type: :controller do
         get :new
         expect(assigns(:trip)).to be_a_new(Trip)
       end
-      it 'renders the :new template' do
+      it 'renders the :new template if you are signed in' do
         get :new
         expect(response).to render_template :new
+      end
+      it 'redirects you to the sign in page if not signed in' do
+        sign_out :user
+        get :new
+        expect(response).to redirect_to new_user_session_path
       end
     end
 
@@ -57,10 +62,16 @@ RSpec.describe TripsController, type: :controller do
         expect(response).to render_template :edit
       end
       it 'allows you to only edit your trips' do
+        user2 = create(:user)
+        sign_out :user
+        sign_in user2
         get :edit, id: @trip
         expect(response).to render_template :edit
       end
       it 'allows admins to edit any trip' do
+        admin1 = create(:admin)
+        sign_out :user
+        sign_in admin1
         get :edit, id: @trip
         expect(response).to render_template :edit
       end

@@ -23,7 +23,6 @@ class TripsController < ApplicationController
   end
 
   def edit
-    redirect_to root_url unless current_user.role == "admin" || @user == current_user
   end
 
   def update
@@ -35,8 +34,11 @@ class TripsController < ApplicationController
   end
 
   def destroy
-    @trip.destroy
-    redirect_to trips_path
+    if @trip.destroy
+      redirect_to trips_path
+    else
+      redirect_to root_url
+    end
   end
 
   private
