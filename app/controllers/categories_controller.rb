@@ -15,7 +15,8 @@ class CategoriesController < ApplicationController
   end
 
   def create
-    @category = Category.create(category_params)
+    @category = Category.new(category_params)
+    authorize @category
     if @category.save
       redirect_to category_path(@category)
     else
@@ -28,6 +29,7 @@ class CategoriesController < ApplicationController
   end
 
   def update
+    authorize @category
     if @category.update(category_params)
       redirect_to @category
     else

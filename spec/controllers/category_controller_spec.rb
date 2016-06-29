@@ -87,6 +87,20 @@ RSpec.describe CategoriesController, type: :controller do
 
     describe 'POST #create' do
       context 'with valid attributes' do
+        it 'does not allow guests to create a category' do
+          sign_out :user
+          expect {
+            post :create, category: attributes_for(:category)
+          }.not_to change(Category, :count)
+        end
+        it 'it does not allow users to create a category' do
+          sign_out :user
+          user2 = create(:user)
+          sign_in user2
+          expect {
+            post :create, category: attributes_for(:category)
+          }.not_to change(Category, :count)
+        end
         it 'saves the new category in the database' do
           expect {
             post :create, category: attributes_for(:category)
@@ -117,6 +131,20 @@ RSpec.describe CategoriesController, type: :controller do
           patch :update, id: @category, category: attributes_for(:category)
           expect(assigns(:category)).to eq(@category)
         end
+        it 'does not allow a guest to update a category' do
+          sign_out :user
+          patch :update, id: @category, category: attributes_for(:category, name: "Hotel")
+          @category.reload
+          expect(@category.name).not_to eq("Hotel")
+        end
+        it 'does not allow a user to update a category' do
+          sign_out :user
+          user2 = create(:user)
+          sign_in user2
+          patch :update, id: @category, category: attributes_for(:category, name: "Hotel")
+          @category.reload
+          expect(@category.name).not_to eq("Hotel")
+        end
         it "changes @category' attributes" do
           patch :update, id: @category, category: attributes_for(:category, name: "Hotel")
           @category.reload
@@ -143,13 +171,13 @@ RSpec.describe CategoriesController, type: :controller do
     end
 
     describe 'DELETE #destroy' do
-      it 'redirects a guest' do
+      it 'does not allow a guest to delete a category' do
         sign_out :user
         expect {
           delete :destroy, id: @category
         }.not_to change(Category, :count)
       end
-      it 'redirects a user who is not an admin' do
+      it 'does not allow a user to delete a category' do
         sign_out :user
         user2 = create(:user)
         sign_in user2

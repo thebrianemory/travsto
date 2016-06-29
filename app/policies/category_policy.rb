@@ -1,8 +1,4 @@
 class CategoryPolicy < ApplicationPolicy
-  def update?
-    user.admin? unless !user
-  end
-
   def destroy?
     user.admin? unless !user
   end
@@ -11,7 +7,15 @@ class CategoryPolicy < ApplicationPolicy
     user.admin? unless !user
   end
 
+  def create?
+    user.admin? unless !user
+  end
+
   def edit?
+    user.admin? unless !user
+  end
+
+  def update?
     user.admin? unless !user
   end
 end
