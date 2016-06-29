@@ -37,10 +37,10 @@ RSpec.describe TripsController, type: :controller do
 
   describe "User and admin access" do
     describe 'GET #new' do
-      it 'redirects you to the sign in page if not signed in' do
+      it 'redirects you if you are a guest' do
         sign_out :user
         get :new
-        expect(response).to redirect_to new_user_session_path
+        expect(response).to redirect_to root_url
       end
       it 'assigns a new trip to @trip' do
         get :new
@@ -53,25 +53,30 @@ RSpec.describe TripsController, type: :controller do
     end
 
     describe 'GET #edit' do
-      it 'assigns the requested trip to @trip' do
+      it 'redirects you if you are a guest' do
+        sign_out :user
         get :edit, id: @trip
-        expect(assigns(:trip)).to eq @trip
-      end
-      it 'renders the :edit template for your trips' do
-        get :edit, id: @trip
-        expect(response).to render_template :edit
+        expect(response).to redirect_to root_url
       end
       it 'allows you to only edit your trips' do
         user2 = create(:user)
         sign_out :user
         sign_in user2
         get :edit, id: @trip
-        expect(response).to render_template :edit
+        expect(response).to redirect_to root_url
       end
       it 'allows admins to edit any trip' do
         admin1 = create(:admin)
         sign_out :user
         sign_in admin1
+        get :edit, id: @trip
+        expect(response).to render_template :edit
+      end
+      it 'assigns the requested trip to @trip' do
+        get :edit, id: @trip
+        expect(assigns(:trip)).to eq @trip
+      end
+      it 'renders the :edit template for your trips' do
         get :edit, id: @trip
         expect(response).to render_template :edit
       end
@@ -81,6 +86,12 @@ RSpec.describe TripsController, type: :controller do
       context 'with valid attributes' do
         before(:each) do
           @user = create(:user)
+        end
+        it 'only allows signed in users to create a trip' do
+          sign_out :user
+          expect {
+            post :create, trip: attributes_for(:trip, user_id: @user.id)
+          }.not_to change(Trip, :count)
         end
         it 'saves the new trip in the database' do
           expect {
@@ -108,6 +119,12 @@ RSpec.describe TripsController, type: :controller do
 
     describe 'PATCH #update' do
       context 'with valid attributes' do
+        it 'does not allow guests to update a trip' do
+          sign_out :user
+          patch :update, id: @trip, trip: attributes_for(:trip, title: "Okay so we went on a trip")
+          @trip.reload
+          expect(@trip.title).not_to eq('Okay so we went on a trip')
+        end
         it "locates the requested @trip" do
           patch :update, id: @trip, trip: attributes_for(:trip)
           expect(assigns(:trip)).to eq(@trip)
@@ -138,6 +155,11 @@ RSpec.describe TripsController, type: :controller do
     end
 
     describe 'DELETE #destroy' do
+      it 'does not allow guests to update a trip' do
+        sign_out :user
+        delete :destroy, id: @trip
+        expect(response).to redirect_to root_url
+      end
       it 'only allows you to delete your trips' do
         user2 = create(:user)
         sign_out :user
