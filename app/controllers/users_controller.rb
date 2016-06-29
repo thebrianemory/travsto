@@ -4,12 +4,12 @@ class UsersController < ApplicationController
     redirect_to root_url unless current_user.role == "admin" || @user == current_user
   end
 
-  def trips
+  def my_trips
     set_user_by_username
     @my_trips = @user.trips
   end
 
-  def reviews
+  def my_reviews
     set_user_by_username
     @my_reviews = @user.reviews
   end
