@@ -4,8 +4,8 @@ RSpec.describe TripsController, type: :controller do
   before(:each) do
     @trip = create(:trip)
     @user = User.find_by_id(@trip.user_id)
+    sign_in @user
   end
-  login_user
 
   describe "Guest access" do
     before(:each) do
@@ -138,6 +138,21 @@ RSpec.describe TripsController, type: :controller do
     end
 
     describe 'DELETE #destroy' do
+      it 'only allows you to delete your trips' do
+        user2 = create(:user)
+        sign_out :user
+        sign_in user2
+        delete :destroy, id: @trip
+        expect(response).to redirect_to root_url
+      end
+      it 'allows an admin to delete any trip' do
+        user2 = create(:admin)
+        sign_out :user
+        sign_in user2
+        expect {
+          delete :destroy, id: @trip
+        }.to change(Trip, :count).by(-1)
+      end
       it 'deletes the trip' do
         expect {
           delete :destroy, id: @trip

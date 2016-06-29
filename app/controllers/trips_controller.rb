@@ -1,6 +1,7 @@
 class TripsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :set_trip, only: [:show, :edit, :update, :destroy]
+  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   def index
     @trips = Trip.all
@@ -34,10 +35,9 @@ class TripsController < ApplicationController
   end
 
   def destroy
-    if @trip.destroy
+    if authorize @trip
+      @trip.destroy
       redirect_to trips_path
-    else
-      redirect_to root_url
     end
   end
 
@@ -48,5 +48,10 @@ class TripsController < ApplicationController
 
   def trip_params
     params.require(:trip).permit(:title, :description, :user_id)
+  end
+
+  def user_not_authorized
+    # flash[:error] = "You are not authorized to perform this action."
+    redirect_to(request.referrer || root_path)
   end
 end
