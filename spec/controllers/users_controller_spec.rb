@@ -3,8 +3,26 @@ require 'rails_helper'
 RSpec.describe UsersController, type: :controller do
   before(:each) do
     @user = create(:user)
+    sign_in @user
   end
-  login_user
+
+  describe 'admin access rights' do
+    before(:each) do
+      @admin1 = create(:admin)
+      sign_out :user
+      sign_in @admin1
+    end
+    describe 'GET #index' do
+      it 'populates an array of all users' do
+        get :index
+        expect(assigns(:users)).to match_array([@user, @admin1])
+      end
+      it 'allows an admin to view the user index page' do
+        get :index
+        expect(assigns(:user)).to render_template :index
+      end
+    end
+  end
 
   describe "GET #show" do
     it 'assigns the requested user to @user' do
@@ -16,9 +34,7 @@ RSpec.describe UsersController, type: :controller do
       expect(response).to render_template :show
     end
     it 'allows only you to see your profile' do
-      user2 = subject.current_user
-      sign_out :user
-      sign_in @user
+      user2 = create(:user)
       get :show, id: user2
       expect(response).to redirect_to root_url
     end

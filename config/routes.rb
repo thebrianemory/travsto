@@ -5,7 +5,8 @@ Rails.application.routes.draw do
   resources :categories
   resources :comments
   devise_for :users, :path => '', :path_names => { :sign_in => 'login', :sign_out => 'logout', :sign_up => 'signup' }
-  resources :users, only: [:show], path: ''
+  get 'users' => 'users#index'
+  resources :users, only: [:show], path: 'u'
   get '/:username/mytrips' => 'users#my_trips'
   get '/:username/myreviews' => 'users#my_reviews'
   root 'welcome#index'
