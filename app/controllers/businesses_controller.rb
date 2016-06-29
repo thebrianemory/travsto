@@ -1,6 +1,6 @@
 class BusinessesController < ApplicationController
-  before_action :verify_is_admin
   before_action :set_business, only: [:show, :edit, :update, :destroy]
+  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   def index
     @businesses = Business.all
@@ -11,10 +11,12 @@ class BusinessesController < ApplicationController
 
   def new
     @business = Business.new
+    authorize @business
   end
 
   def create
-    @business = Business.create(business_params)
+    @business = Business.new(business_params)
+    authorize @business
     if @business.save
       redirect_to business_path(@business)
     else
@@ -23,9 +25,11 @@ class BusinessesController < ApplicationController
   end
 
   def edit
+    authorize @business
   end
 
   def update
+    authorize @business
     if @business.update(business_params)
       redirect_to @business
     else
@@ -34,6 +38,7 @@ class BusinessesController < ApplicationController
   end
 
   def destroy
+    authorize @business
     @business.destroy
     redirect_to businesses_path
   end
