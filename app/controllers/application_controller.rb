@@ -8,4 +8,9 @@ class ApplicationController < ActionController::Base
   def verify_is_admin
     (current_user.nil?) ? redirect_to(root_path) : (redirect_to(root_path) unless current_user.admin?)
   end
+
+  def user_not_authorized
+    flash[:error] = "You are not authorized to perform this action."
+    redirect_to(request.referrer || root_path)
+  end
 end

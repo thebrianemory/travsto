@@ -1,6 +1,6 @@
 class CategoriesController < ApplicationController
-  before_action :verify_is_admin, except: [:index, :show]
   before_action :set_category, only: [:show, :edit, :update, :destroy]
+  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   def index
     @categories = Category.all
@@ -11,6 +11,7 @@ class CategoriesController < ApplicationController
 
   def new
     @category = Category.new
+    authorize @category
   end
 
   def create
@@ -23,6 +24,7 @@ class CategoriesController < ApplicationController
   end
 
   def edit
+    authorize @category
   end
 
   def update
@@ -34,6 +36,7 @@ class CategoriesController < ApplicationController
   end
 
   def destroy
+    authorize @category
     @category.destroy
     redirect_to categories_path
   end

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe TripPolicy do
+RSpec.describe CategoryPolicy do
 
   let(:user) { User.new }
 

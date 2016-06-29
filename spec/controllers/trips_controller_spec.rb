@@ -37,6 +37,11 @@ RSpec.describe TripsController, type: :controller do
 
   describe "User and admin access" do
     describe 'GET #new' do
+      it 'redirects you to the sign in page if not signed in' do
+        sign_out :user
+        get :new
+        expect(response).to redirect_to new_user_session_path
+      end
       it 'assigns a new trip to @trip' do
         get :new
         expect(assigns(:trip)).to be_a_new(Trip)
@@ -44,11 +49,6 @@ RSpec.describe TripsController, type: :controller do
       it 'renders the :new template if you are signed in' do
         get :new
         expect(response).to render_template :new
-      end
-      it 'redirects you to the sign in page if not signed in' do
-        sign_out :user
-        get :new
-        expect(response).to redirect_to new_user_session_path
       end
     end
 

@@ -40,6 +40,18 @@ RSpec.describe CategoriesController, type: :controller do
     login_admin
 
     describe 'GET #new' do
+      it 'redirects a guest' do
+        sign_out :user
+        get :new
+        expect(response).to redirect_to root_url
+      end
+      it 'redirects a user who is not an admin' do
+        sign_out :user
+        user2 = create(:user)
+        sign_in user2
+        get :new
+        expect(response).to redirect_to root_url
+      end
       it 'assigns a new category to @category' do
         get :new
         expect(assigns(:category)).to be_a_new(Category)
@@ -51,6 +63,18 @@ RSpec.describe CategoriesController, type: :controller do
     end
 
     describe 'GET #edit' do
+      it 'redirects a guest' do
+        sign_out :user
+        get :edit, id: @category
+        expect(response).to redirect_to root_url
+      end
+      it 'redirects a user who is not an admin' do
+        sign_out :user
+        user2 = create(:user)
+        sign_in user2
+        get :edit, id: @category
+        expect(response).to redirect_to root_url
+      end
       it 'assigns the requested category to @category' do
         get :edit, id: @category
         expect(assigns(:category)).to eq @category
@@ -119,6 +143,20 @@ RSpec.describe CategoriesController, type: :controller do
     end
 
     describe 'DELETE #destroy' do
+      it 'redirects a guest' do
+        sign_out :user
+        expect {
+          delete :destroy, id: @category
+        }.not_to change(Category, :count)
+      end
+      it 'redirects a user who is not an admin' do
+        sign_out :user
+        user2 = create(:user)
+        sign_in user2
+        expect {
+          delete :destroy, id: @category
+        }.not_to change(Category, :count)
+      end
       it 'deletes the category' do
         expect {
           delete :destroy, id: @category
