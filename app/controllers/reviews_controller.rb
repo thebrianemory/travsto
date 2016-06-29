@@ -1,17 +1,20 @@
 class ReviewsController < ApplicationController
   before_action :set_review, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!
+  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   def index
-    redirect_to root_url
+    @reviews = Review.all
+    authorize Review
   end
 
   def new
     @review = Review.new
+    authorize @review
   end
 
   def create
-    @review = Review.create(review_params)
+    @review = Review.new(review_params)
+    authorize @review
     if @review.save
       redirect_to business_path(@review.business_id)
     else
@@ -20,12 +23,15 @@ class ReviewsController < ApplicationController
   end
 
   def show
+    authorize @review
   end
 
   def edit
+    authorize @review
   end
 
   def update
+    authorize @review
     if @review.update(review_params)
       redirect_to business_path(@review.business_id)
     else
@@ -34,6 +40,7 @@ class ReviewsController < ApplicationController
   end
 
   def destroy
+    authorize @review
     business = Business.find_by_id(@review.business_id)
     @review.destroy
     redirect_to business_path(business)

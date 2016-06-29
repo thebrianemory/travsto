@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe BusinessPolicy do
+RSpec.describe ReviewPolicy do
 
   let(:user) { User.new }
 
