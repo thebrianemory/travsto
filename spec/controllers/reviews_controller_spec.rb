@@ -119,8 +119,16 @@ RSpec.describe ReviewsController, type: :controller do
 
     describe 'PATCH #update' do
       context 'with valid attributes' do
-        it "it does not allow a guest to update a review" do
+        it "does not allow a guest to update a review" do
           sign_out :user
+          patch :update, id: @review, review: attributes_for(:business, rating: 1)
+          @review.reload
+          expect(@review.rating).not_to eq(1)
+        end
+        it "only allows you to edit your reviews" do
+          sign_out :user
+          user2 = create(:user)
+          sign_in user2
           patch :update, id: @review, review: attributes_for(:business, rating: 1)
           @review.reload
           expect(@review.rating).not_to eq(1)
@@ -157,6 +165,14 @@ RSpec.describe ReviewsController, type: :controller do
     describe 'DELETE #destroy' do
       it 'does not allow a guest to delete a review' do
         sign_out :user
+        expect {
+          delete :destroy, id: @review
+        }.not_to change(Review, :count)
+      end
+      it 'only allows a user to delete their reviews' do
+        sign_out :user
+        user2 = create(:user)
+        sign_in user2
         expect {
           delete :destroy, id: @review
         }.not_to change(Review, :count)
