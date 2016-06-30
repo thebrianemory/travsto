@@ -41,9 +41,8 @@ RSpec.describe BusinessesController, type: :controller do
         expect(response).to redirect_to root_url
       end
       it 'does not allow users to visit the new business page' do
-        user2 = create(:user)
         sign_out :user
-        sign_in user2
+        sign_in user2 = create(:user)
         get :new
         expect(response).to redirect_to root_url
       end
@@ -64,9 +63,8 @@ RSpec.describe BusinessesController, type: :controller do
         expect(response).to redirect_to root_url
       end
       it 'does not allow users to edit a business' do
-        user2 = create(:user)
         sign_out :user
-        sign_in user2
+        sign_in user2 = create(:user)
         get :edit, id: @business
         expect(response).to redirect_to root_url
       end
@@ -92,9 +90,8 @@ RSpec.describe BusinessesController, type: :controller do
           }.not_to change(Business, :count)
         end
         it 'does not allow users to create a busines' do
-          user2 = create(:user)
           sign_out :user
-          sign_in user2
+          sign_in user2 = create(:user)
           expect {
             post :create, business: attributes_for(:business, category_id: @category.id)
           }.not_to change(Business, :count)
@@ -132,9 +129,8 @@ RSpec.describe BusinessesController, type: :controller do
           expect(@business.name).not_to eq('This is a new business')
         end
         it 'does not allow a user to update a business' do
-          user2 = create(:user)
           sign_out :user
-          sign_in user2
+          sign_in user2 = create(:user)
           patch :update, id: @business, business: attributes_for(:business, name: "This is a new business")
           @business.reload
           expect(@business.name).not_to eq('This is a new business')
@@ -176,9 +172,8 @@ RSpec.describe BusinessesController, type: :controller do
         }.not_to change(Business, :count)
       end
       it 'does not allow a user to delete a business' do
-        user2 = create(:user)
         sign_out :user
-        sign_in user2
+        sign_in user2 = create(:user)
         expect {
           delete :destroy, id: @business
         }.not_to change(Business, :count)
