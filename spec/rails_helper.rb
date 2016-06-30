@@ -35,6 +35,9 @@ RSpec.configure do |config|
   # Include Factory Girl syntax to simplify calls to factories
   config.include FactoryGirl::Syntax::Methods
 
+  # Include custom login macros
+  config.include LoginMacros
+
   # Configure DatabaseCleaner to reset data between tests
   config.before(:suite) do
     DatabaseCleaner.strategy = :transaction

@@ -23,4 +23,8 @@ feature 'User management' do
     end
     expect(page).to have_content 'batman'
   end
+
+  scenario 'a user can log in' do
+    sign_in user = create(:user)
+  end
 end
