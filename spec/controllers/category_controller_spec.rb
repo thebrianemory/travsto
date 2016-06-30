@@ -47,8 +47,7 @@ RSpec.describe CategoriesController, type: :controller do
       end
       it 'redirects a user who is not an admin' do
         sign_out :user
-        user2 = create(:user)
-        sign_in user2
+        sign_in user2 = create(:user)
         get :new
         expect(response).to redirect_to root_url
       end
@@ -70,8 +69,7 @@ RSpec.describe CategoriesController, type: :controller do
       end
       it 'redirects a user who is not an admin' do
         sign_out :user
-        user2 = create(:user)
-        sign_in user2
+        sign_in user2 = create(:user)
         get :edit, id: @category
         expect(response).to redirect_to root_url
       end
@@ -95,8 +93,7 @@ RSpec.describe CategoriesController, type: :controller do
         end
         it 'it does not allow users to create a category' do
           sign_out :user
-          user2 = create(:user)
-          sign_in user2
+          sign_in user2 = create(:user)
           expect {
             post :create, category: attributes_for(:category)
           }.not_to change(Category, :count)
@@ -139,8 +136,7 @@ RSpec.describe CategoriesController, type: :controller do
         end
         it 'does not allow a user to update a category' do
           sign_out :user
-          user2 = create(:user)
-          sign_in user2
+          sign_in user2 = create(:user)
           patch :update, id: @category, category: attributes_for(:category, name: "Hotel")
           @category.reload
           expect(@category.name).not_to eq("Hotel")
@@ -179,8 +175,7 @@ RSpec.describe CategoriesController, type: :controller do
       end
       it 'does not allow a user to delete a category' do
         sign_out :user
-        user2 = create(:user)
-        sign_in user2
+        sign_in user2 = create(:user)
         expect {
           delete :destroy, id: @category
         }.not_to change(Category, :count)
