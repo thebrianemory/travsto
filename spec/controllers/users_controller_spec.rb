@@ -2,15 +2,13 @@ require 'rails_helper'
 
 RSpec.describe UsersController, type: :controller do
   before(:each) do
-    @user = create(:user)
-    sign_in @user
+    sign_in @user = create(:user)
   end
 
   describe 'admin access rights' do
     before(:each) do
-      @admin1 = create(:admin)
       sign_out :user
-      sign_in @admin1
+      sign_in @admin1 = create(:admin)
     end
     describe 'GET #index' do
       it 'populates an array of all users' do
@@ -34,8 +32,7 @@ RSpec.describe UsersController, type: :controller do
       expect(response).to render_template :show
     end
     it 'allows only you to see your profile' do
-      user2 = create(:user)
-      get :show, id: user2
+      get :show, id: user2 = create(:user)
       expect(response).to redirect_to root_url
     end
 
