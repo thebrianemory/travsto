@@ -3,8 +3,7 @@ require 'rails_helper'
 RSpec.describe TripsController, type: :controller do
   before(:each) do
     @trip = create(:trip)
-    @user = User.find_by_id(@trip.user_id)
-    sign_in @user
+    sign_in @user = User.find_by_id(@trip.user_id)
   end
 
   describe "Guest access" do
@@ -24,12 +23,13 @@ RSpec.describe TripsController, type: :controller do
     end
 
     describe 'GET #show' do
-      it 'assigns the requested trip to @trip' do
+      before(:each) do
         get :show, id: @trip
+      end
+      it 'assigns the requested trip to @trip' do
         expect(assigns(:trip)).to render_template :show
       end
       it 'renders the :show template' do
-        get :show, id: @trip
         expect(response).to render_template :show
       end
     end
@@ -59,16 +59,14 @@ RSpec.describe TripsController, type: :controller do
         expect(response).to redirect_to root_url
       end
       it 'allows you to only edit your trips' do
-        user2 = create(:user)
         sign_out :user
-        sign_in user2
+        sign_in user2 = create(:user)
         get :edit, id: @trip
         expect(response).to redirect_to root_url
       end
       it 'allows admins to edit any trip' do
-        admin1 = create(:admin)
         sign_out :user
-        sign_in admin1
+        sign_in admin1 = create(:admin)
         get :edit, id: @trip
         expect(response).to render_template :edit
       end
@@ -161,16 +159,14 @@ RSpec.describe TripsController, type: :controller do
         expect(response).to redirect_to root_url
       end
       it 'only allows you to delete your trips' do
-        user2 = create(:user)
         sign_out :user
-        sign_in user2
+        sign_in user2 = create(:user)
         delete :destroy, id: @trip
         expect(response).to redirect_to root_url
       end
       it 'allows an admin to delete any trip' do
-        user2 = create(:admin)
         sign_out :user
-        sign_in user2
+        sign_in admin1 = create(:admin)
         expect {
           delete :destroy, id: @trip
         }.to change(Trip, :count).by(-1)
