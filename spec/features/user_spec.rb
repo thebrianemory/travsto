@@ -2,9 +2,7 @@ require 'rails_helper'
 
 feature 'User management' do
   scenario "adds a new user", js: false do
-    # login_as(admin = create(:admin))
-
-    visit root_url
+    visit root_path
     expect{
       click_link 'Sign Up'
       fill_in 'First name', with: 'Bat'

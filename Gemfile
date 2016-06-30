@@ -49,9 +49,9 @@ end
 
 group :test do
   gem 'capybara'
+  gem 'poltergeist'
   gem 'database_cleaner'
   gem 'launchy'
-  gem 'selenium-webdriver'
 end
 
 group :development do
