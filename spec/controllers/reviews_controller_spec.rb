@@ -4,15 +4,13 @@ RSpec.describe ReviewsController, type: :controller do
   before(:each) do
     @review = create(:review)
     @business = Business.find_by_id(@review.business_id)
-    @user = User.find_by_id(@review.user_id)
-    sign_in @user
+    sign_in @user = User.find_by_id(@review.user_id)
   end
 
   describe 'user and guest access right' do
     before(:each) do
-      admin1 = create(:admin)
       sign_out :user
-      sign_in admin1
+      sign_in admin1 = create(:admin)
     end
     describe 'GET #index' do
       it 'redirects to the root url if you are not an admin' do
@@ -127,8 +125,7 @@ RSpec.describe ReviewsController, type: :controller do
         end
         it "only allows you to edit your reviews" do
           sign_out :user
-          user2 = create(:user)
-          sign_in user2
+          sign_in user2 = create(:user)
           patch :update, id: @review, review: attributes_for(:business, rating: 1)
           @review.reload
           expect(@review.rating).not_to eq(1)
@@ -171,8 +168,7 @@ RSpec.describe ReviewsController, type: :controller do
       end
       it 'only allows a user to delete their reviews' do
         sign_out :user
-        user2 = create(:user)
-        sign_in user2
+        sign_in user2 = create(:user)
         expect {
           delete :destroy, id: @review
         }.not_to change(Review, :count)
