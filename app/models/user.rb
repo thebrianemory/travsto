@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
-  validates_presence_of :first_name, :last_name, :email, :username
+  validates_presence_of :first_name, :last_name, :email, :username, :password, :password_confirmation
   validates_uniqueness_of :username, :email
   validates :username, format: { with: /\A[a-z0-9]{6,15}\z/i }
   has_many :trips, dependent: :destroy

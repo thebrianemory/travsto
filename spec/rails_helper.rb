@@ -54,6 +54,15 @@ RSpec.configure do |config|
   config.include Devise::TestHelpers, :type => :controller
   config.extend ControllerMacros, :type => :controller
 
+  config.include Warden::Test::Helpers
+  config.before :suite do
+    Warden.test_mode!
+  end
+
+  config.after :each do
+    Warden.test_reset!
+  end
+
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
   # instead of true.

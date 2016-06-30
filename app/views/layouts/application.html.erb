@@ -2,13 +2,24 @@
 <html>
 <head>
   <title>Travsto</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-
+<%= render 'layouts/navigation' %>
+<%= content_tag(:div, flash[:error], :id => "flash_error") if flash[:error] %>
+<%= content_tag(:div, flash[:notice], :id => "flash_notice") if flash[:notice] %>
+<%= content_tag(:div, flash[:alert], :id => "flash_alert") if flash[:alert] %>
 <%= yield %>
 
+<hr>
+  <footer class="container">
+    <small>&copy; 2016 Developed by <a href="http://www.brianemory.com">Brian Emory</a> | <a href="https://github.com/thebrianemory">GitHub <i class="fa fa-github"></i></a></small>
+  </footer>
+
+  <script src="https://code.jquery.com/jquery-2.2.3.min.js"   integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo="   crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 </body>
 </html>

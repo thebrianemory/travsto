@@ -3,16 +3,14 @@ require 'rails_helper'
 RSpec.describe CommentsController, type: :controller do
   before(:each) do
     @comment = create(:comment)
-    @user = User.find_by_id(@comment.user_id)
     @trip = Trip.find_by_id(@comment.trip_id)
-    sign_in @user
+    sign_in @user = User.find_by_id(@comment.user_id)
   end
 
   describe 'guest and user access rights' do
     before(:each) do
-      admin1 = create(:admin)
       sign_out :user
-      sign_in admin1
+      sign_in admin1 = create(:admin)
     end
     describe 'GET #index' do
       it 'redirects to the root url if you are not an admin' do
@@ -122,8 +120,7 @@ RSpec.describe CommentsController, type: :controller do
         end
         it "only allows you to update your comments" do
           sign_out :user
-          user2 = create(:user)
-          sign_in user2
+          sign_in user2 = create(:user)
           patch :update, id: @comment, comment: attributes_for(:comment, content: "This is lame.")
           @comment.reload
           expect(@comment.content).not_to eq("This is lame.")
@@ -166,8 +163,7 @@ RSpec.describe CommentsController, type: :controller do
       end
       it 'only allows you to delete your comments' do
         sign_out :user
-        user2 = create(:user)
-        sign_in user2
+        sign_in user2 = create(:user)
         expect {
           delete :destroy, id: @comment
         }.not_to change(Comment, :count)
