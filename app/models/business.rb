@@ -4,7 +4,7 @@ class Business < ActiveRecord::Base
   has_many :reviews
   has_many :business_trips
   has_many :trips, through: :business_trips
-  validates_presence_of :name, :category_id
+  validates_presence_of :name, :category
   validates_uniqueness_of :name
 
   extend FriendlyId

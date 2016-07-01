@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 feature 'User management' do
-  scenario "adds a new user", js: false do
+  scenario "a visitor can create an account", js: false do
     visit root_path
     expect{
       click_link 'Sign Up'
@@ -22,7 +22,7 @@ feature 'User management' do
     expect(page).to have_content 'batman'
   end
 
-  scenario 'a user can log in' do
+  scenario 'a vistor can log into their account' do
     sign_in user = create(:user)
   end
 end

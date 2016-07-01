@@ -62,7 +62,7 @@ RSpec.describe Business, type: :model do
     it "is invalid without a category_id" do
       @business.category_id = nil
       @business.valid?
-      expect(@business.errors[:category_id]).to include("can't be blank")
+      expect(@business.errors[:category]).to include("can't be blank")
     end
   end
 
