@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   resources :reviews
   resources :trips
   resources :businesses, path: 'biz'
-  resources :categories
+  resources :categories, path: 'c'
   resources :comments
   devise_for :users, :path => '', :path_names => {:sign_in => 'login', :sign_out => 'logout', :sign_up => 'signup'}, :controllers => { registrations: 'registrations' }
   get 'users' => 'users#index'

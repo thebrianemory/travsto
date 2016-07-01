@@ -22,9 +22,9 @@
           <ul class="dropdown-menu">
             <li><%= link_to 'View All Businesses', businesses_path %></li>
             <li role="separator" class="divider"></li>
-            <li><%= link_to 'View Restaurants' %></li>
-            <li><%= link_to 'View Hotels' %></li>
-            <li><%= link_to 'View Attractions' %></li>
+            <li><%= link_to 'View Restaurants', category_path('restaurants') %></li>
+            <li><%= link_to 'View Hotels', category_path('hotels') %></li>
+            <li><%= link_to 'View Attractions', category_path('attractions') %></li>
           </ul>
         </li>
         <li class="dropdown">

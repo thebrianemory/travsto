@@ -32,13 +32,13 @@ User.create(
 
 ### Categories ###
 Category.create(
-  name: "Restaurant"
+  name: "Restaurants"
 )
 Category.create(
-  name: "Hotel"
+  name: "Hotels"
 )
 Category.create(
-  name: "Attraction"
+  name: "Attractions"
 )
 
 ### Businesses ###

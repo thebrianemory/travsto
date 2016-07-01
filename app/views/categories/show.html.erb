@@ -1,1 +1,6 @@
-<h2>Category page</h2>
+<h1><%= @category.name + " Index" %></h1>
+<ul>
+  <% @category.businesses.each do |business| %>
+    <li><%= link_to business.name, business_path(business) %></li>
+  <% end %>
+</ul>
