@@ -8,6 +8,10 @@
     <%= f.label :description %>
     <%= f.text_area :description, class: 'form-control' %>
 
+    <%= f.label :business, 'Business' %>
+    <%= f.collection_select :business_ids, Business.all, :id, :name, class: 'form-control' %>
+    <br>
+
     <br><%= f.submit 'Add Trip', class: 'btn btn-primary' %>
   <% end %>
 

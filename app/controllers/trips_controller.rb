@@ -14,6 +14,7 @@ class TripsController < ApplicationController
   def create
     @trip = Trip.new(trip_params)
     @trip.user = current_user
+    @trip.businesses << Business.find(params[:trip][:business_ids])
     authorize @trip
     if @trip.save
       redirect_to trip_path(@trip)
@@ -50,6 +51,6 @@ class TripsController < ApplicationController
   end
 
   def trip_params
-    params.require(:trip).permit(:title, :description, :user_id)
+    params.require(:trip).permit(:title, :description, :user_id, business_ids:[])
   end
 end

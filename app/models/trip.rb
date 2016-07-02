@@ -9,4 +9,11 @@ class Trip < ActiveRecord::Base
 
   extend FriendlyId
   friendly_id :title, use: :slugged
+
+  def businesses_attributes=(business_attributes)
+    business_attributes.values.each do |business_attribute|
+      business = Category.find_or_create_by(business_attribute)
+      self.businesses << business
+    end
+  end
 end

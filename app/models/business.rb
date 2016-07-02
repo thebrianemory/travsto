@@ -1,5 +1,4 @@
 class Business < ActiveRecord::Base
-  has_many :trips
   belongs_to :category
   has_many :reviews
   has_many :business_trips
