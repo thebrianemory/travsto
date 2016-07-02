@@ -3,7 +3,7 @@ module ControllerMacros
     before(:each) do
       @request.env["devise.mapping"] = Devise.mappings[:admin]
       admin = FactoryGirl.create(:admin)
-      sign_in :user, admin
+      sign_in admin, scope: :user
     end
   end
 

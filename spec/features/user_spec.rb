@@ -44,6 +44,7 @@ feature 'User expectations' do
   end
 
   scenario 'a user can create a new trip' do
+    create(:business)
     expect {
       click_link 'Account'
       click_link 'Add Trip'
