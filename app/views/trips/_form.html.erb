@@ -1,15 +1,15 @@
 <%= form_for @trip do |f| %>
-  <div class="field">
-    <%= f.label :title %>
+  <div>
+    <%= f.label :title, "#{(@trip.errors.full_messages_for(:title).first)}" %>
     <%= f.text_field :title %>
   </div>
 
-  <div class="field">
-    <%= f.label :description %>
+  <div>
+    <%= f.label :description, "#{@trip.errors.full_messages_for(:description).first}" %>
     <%= f.text_area :description %>
   </div>
 
-  <div class="field">
+  <div>
     <%= f.submit 'Add Trip' %>
   </div>
 <% end %>
