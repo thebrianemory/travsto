@@ -14,7 +14,6 @@ class TripsController < ApplicationController
   def create
     @trip = Trip.new(trip_params)
     @trip.user = current_user
-    @trip.businesses << Business.find(params[:trip][:business_ids]) unless params[:trip][:business_ids] == nil
     authorize @trip
     if @trip.save
       redirect_to trip_path(@trip)
