@@ -12,7 +12,7 @@ class Trip < ActiveRecord::Base
 
   def businesses_attributes=(business_attributes)
     business_attributes.values.each do |business_attribute|
-      business = Category.find_or_create_by(business_attribute)
+      business = Business.find_or_create_by(business_attribute)
       self.businesses << business
     end
   end

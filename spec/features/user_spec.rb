@@ -44,12 +44,13 @@ feature 'User expectations' do
   end
 
   scenario 'a user can create a new trip' do
-    create(:business)
+    biz = create(:business)
     expect {
       click_link 'Account'
       click_link 'Add Trip'
       fill_in 'Title', with: 'This is my trip to Hawaii'
       fill_in 'Description', with: 'I need...I need...I need... fish fingers and custard! I never know why. I only know who. Come along, Pond! There are fixed points throughout time where things must stay exactly the way they are. This is not one of them. This is an opportunity!'
+      check("#{biz.name}")
       click_button 'Add Trip'
     }.to change(Trip, :count).by(1)
   end

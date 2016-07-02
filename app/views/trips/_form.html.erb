@@ -2,21 +2,43 @@
   <%= form_for @trip do |f| %>
     <%= render 'shared/error_messages' %>
 
-    <%= f.label :title %>
-    <%= f.text_field :title, class: 'form-control' %>
+    <p>
+      <%= f.label :title %>
+      <%= f.text_field :title, class: 'form-control' %>
+    </p>
 
-    <%= f.label :description %>
-    <%= f.text_area :description, class: 'form-control' %>
+    <p>
+      <%= f.label :description %>
+      <%= f.text_area :description, class: 'form-control' %>
+    </p>
 
-    <%= f.label :business, 'Places I visited' %> <br>
-    <%= f.collection_check_boxes :business_ids, Business.all, :id, :name do |b| %>
-      <%= b.label do %>
-        <%= b.check_box + b.text %>
+    <p>
+      <%= f.label 'Places I visited' %> <br>
+      <%= f.collection_check_boxes :business_ids, Business.all, :id, :name do |b| %>
+        <%= b.label do %>
+          <%= b.check_box + b.text %>
+        <% end %>
       <% end %>
-    <% end %>
-    <br>
+    </p>
 
-    <br><%= f.submit 'Add Trip', class: 'btn btn-primary' %>
+    <p>
+      <%= f.label "Add new place" %> <br>
+      <%= f.fields_for :businesses, @trip.businesses.build do |biz_fields| %>
+        <%= biz_fields.label :name %>
+        <%= biz_fields.text_field :name %>
+
+        <p>
+          <%= biz_fields.label :category %>
+          <%= biz_fields.collection_radio_buttons :category_id, Category.all, :id, :name do |c| %>
+            <%= c.label do %>
+              <%= c.radio_button + c.text %>
+            <% end %>
+          <% end %>
+        </p>
+      <% end %>
+    </p>
+
+  <p><%= f.submit 'Add Trip', class: 'btn btn-primary' %></p>
   <% end %>
 
 </div>

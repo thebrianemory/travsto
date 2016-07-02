@@ -4,11 +4,11 @@ class BusinessPolicy < ApplicationPolicy
   end
 
   def new?
-    user.admin? unless !user
+    user || user.admin? unless !user
   end
 
   def create?
-    user.admin? unless !user
+    user || user.admin? unless !user
   end
 
   def edit?
