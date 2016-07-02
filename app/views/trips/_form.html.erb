@@ -1,15 +1,14 @@
-<%= form_for @trip do |f| %>
-  <div>
-    <%= f.label :title, "#{(@trip.errors.full_messages_for(:title).first)}" %>
-    <%= f.text_field :title %>
-  </div>
+<div class="well col-md-8 col-md-offset-2">
+  <%= form_for @trip do |f| %>
+    <%= render 'shared/error_messages' %>
 
-  <div>
-    <%= f.label :description, "#{@trip.errors.full_messages_for(:description).first}" %>
-    <%= f.text_area :description %>
-  </div>
+    <%= f.label :title %>
+    <%= f.text_field :title, class: 'form-control' %>
 
-  <div>
-    <%= f.submit 'Add Trip' %>
-  </div>
-<% end %>
+    <%= f.label :description %>
+    <%= f.text_area :description, class: 'form-control' %>
+
+    <br><%= f.submit 'Add Trip', class: 'btn btn-primary' %>
+  <% end %>
+
+</div>

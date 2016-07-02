@@ -1,0 +1,12 @@
+<% if @trip.errors.any? %>
+  <div id="error_explanation">
+    <div class="alert alert-danger">
+      The form contains <%= pluralize(@trip.errors.count, "error") %>.
+    </div>
+    <ul>
+    <% @trip.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
