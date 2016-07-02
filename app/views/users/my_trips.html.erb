@@ -1,4 +1,4 @@
-<h2>User's trips</h2>
+<h2><%= @user.username + "'s trips" %></h2>
 <% @my_trips.each do |trip| %>
   <ul>
     <li><%= link_to trip.title, trip_path(trip) %></li>
