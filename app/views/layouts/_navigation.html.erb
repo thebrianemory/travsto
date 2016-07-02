@@ -17,27 +17,8 @@
         <% if current_user %>
           <li><%= link_to 'Welcome, ' + current_user.username + '!' %></li>
         <% end %>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Businesses <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><%= link_to 'View All Businesses', businesses_path %></li>
-            <li role="separator" class="divider"></li>
-            <li><%= link_to 'View Restaurants', category_path('restaurants') %></li>
-            <li><%= link_to 'View Hotels', category_path('hotels') %></li>
-            <li><%= link_to 'View Attractions', category_path('attractions') %></li>
-          </ul>
-        </li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Trips <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><%= link_to 'View All Trips', trips_path %></li>
-            <% if current_user %>
-              <li role="separator" class="divider"></li>
-              <li><%= link_to 'My Trips' %></li>
-              <li><%= link_to 'Create a Trip' %></li>
-            <% end %>
-          </ul>
-        </li>
+        <li><%= link_to 'Businesses', businesses_path %></li>
+        <li><%= link_to 'Trips', trips_path %></li>
         <% if !current_user %>
         <li><%= link_to 'Log In', new_user_session_path %></li>
           <li><%= link_to 'Sign Up', new_user_registration_path %></li>

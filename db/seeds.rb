@@ -4,6 +4,7 @@ User.create(
   last_name: "Emory",
   email: "the@brianemory.com",
   password: "Batword1",
+  password_confirmation: "Batword1",
   username: 'thebrianemory',
   role: 1
 )
@@ -13,21 +14,24 @@ User.create(
   last_name: "Thor",
   email: "mighty.thor@example.com",
   username: "mightythor",
-  password: 'password'
+  password: 'password',
+  password_confirmation: 'password'
 )
 User.create(
   first_name: "Steve",
   last_name: "Rogers",
   email: "steve.rogers@example.com",
   username: "steverogers",
-  password: 'password'
+  password: 'password',
+  password_confirmation: 'password'
 )
 User.create(
   first_name: "Tony",
   last_name: "Stark",
   email: "tony.stark@example.com",
   username: "tonystark",
-  password: 'password'
+  password: 'password',
+  password_confirmation: 'password'
 )
 
 ### Categories ###

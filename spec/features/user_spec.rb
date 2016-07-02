@@ -1,48 +1,37 @@
 require 'rails_helper'
 
-feature 'Visitor expectations' do
-  scenario 'a visitor can view the business index', js: false do
+feature 'User expectations' do
+  before(:each) do
+    sign_in create(:user)
     visit root_path
+  end
+  scenario 'a user can view the business index', js: false do
     click_link 'Businesses'
-    click_link 'View All Businesses'
     within 'h1' do
       expect(page).to have_content 'Business Index'
     end
   end
-  scenario 'a visitor can view businesses by category', js: false do
-    create(:category, name: 'Restaurants')
-    visit root_path
-    click_link 'Businesses'
-    click_link 'View Restaurants'
+
+  scenario 'a user can view the trips index', js: false do
+    click_link 'Trips'
     within 'h1' do
-      expect(page).to have_content 'Restaurants Index'
+      expect(page).to have_content 'Trip Index'
     end
   end
-  scenario "a visitor can create an account", js: false do
-    visit root_path
-    expect{
-      click_link 'Sign Up'
-      fill_in 'First name', with: 'Bat'
-      fill_in 'Last name', with: 'Man'
-      fill_in 'Email', with: 'batman@example.com'
-      fill_in 'Username', with: 'batman'
-      find('#password').fill_in 'Password', with: 'Batword1'
-      find('#password_confirmation').fill_in 'Password confirmation',
-        with: 'Batword1'
-      click_button 'Sign Up'
-    }.to change(User, :count).by(1)
-    expect(current_path).to eq user_path(User.last)
-    expect(page).to have_content 'Welcome! You have signed up successfully.'
-    within 'h1' do
-      expect(page).to have_content 'User Profile Page'
-    end
-    expect(page).to have_content 'batman'
+
+  scenario 'a user can log out' do
+    click_link 'Account'
+    click_link 'Log Out'
+    expect(page).to have_content 'Signed out successfully.'
   end
 
-  scenario 'a vistor can log into their account' do
-    sign_in user = create(:user)
+  scenario 'a user can visit their profile page' do
+    click_link 'Account'
+    click_link 'Profile'
+    expect(page).to have_content "Welcome, #{User.last.username}!"
   end
-end
-feature 'User management' do
 
+  scenario 'a user can view the new trip page' do
+    
+  end
 end
