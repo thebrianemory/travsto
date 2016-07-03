@@ -21,9 +21,7 @@ RSpec.describe User, type: :model do
   describe "associations" do
     before(:each) do
       @user = create(:user)
-      @category = create(:category)
-      @business = create(:business, category_id: @category.id)
-      @review = create(:review, user_id: @user.id, business_id: @business.id)
+      @business = create(:business)
       @trip = create(:trip, user_id: @user.id)
       @comment = create(:comment, user_id: @user.id, trip_id: @trip.id)
     end
@@ -31,11 +29,6 @@ RSpec.describe User, type: :model do
       @user.trips << @trip
       @user.save
       expect(@user.trips.count).to eq 1
-    end
-    it "has many reviews" do
-      @user.reviews << @review
-      @user.save
-      expect(@user.reviews.count).to eq 1
     end
     it "has many comments" do
       @user.comments << @comment

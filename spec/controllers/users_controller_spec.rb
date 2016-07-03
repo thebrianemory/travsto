@@ -55,11 +55,4 @@ RSpec.describe UsersController, type: :controller do
       expect(response).to render_template :my_trips
     end
   end
-
-  describe 'GET #reviews' do
-    it 'allows the user to view their reviews' do
-      get :my_reviews, username: @user
-      expect(response).to render_template :my_reviews
-    end
-  end
 end
