@@ -16,20 +16,24 @@
       <%= f.label 'Places I visited' %> <br>
       <%= f.collection_check_boxes :business_ids, Business.all, :id, :name do |b| %>
         <%= b.label do %>
-          <%= b.check_box + b.text %>
+          <%= b.check_box + b.text unless b.text.blank? %>
         <% end %>
       <% end %>
     </p>
 
-    <p>
+    <div id="biz_choices">
       <%= f.label "Add new place" %> <br>
-      <%= f.fields_for :businesses, @trip.businesses.build do |biz_fields| %>
-        <%= biz_fields.label :name %>
-        <%= biz_fields.text_field :name %>
-      <% end %>
+      <%= render partial: 'add_business', locals: { f: f } %>
+    </div>
+
+    <p>
+      <button type="button" id="addNewChoice" class="btn btn-xs btn-success">Add another</button>
     </p>
 
   <p><%= f.submit 'Add Trip', class: 'btn btn-primary' %></p>
-  <% end %>
 
+  <div style="display: none;" id="new_choice_form">
+      <%= render partial: 'add_business', locals: { f: f } %>
+  </div>
+  <% end %>
 </div>
