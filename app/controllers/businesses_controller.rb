@@ -9,6 +9,10 @@ class BusinessesController < ApplicationController
   def show
   end
 
+  def new
+    redirect_to root_path
+  end
+
   def edit
     authorize @business
   end

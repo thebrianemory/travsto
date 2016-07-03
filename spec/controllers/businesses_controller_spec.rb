@@ -3,7 +3,6 @@ require 'rails_helper'
 RSpec.describe BusinessesController, type: :controller do
   before(:each) do
     @business = create(:business)
-    @category = Category.find_by_id(@business.category_id)
   end
 
   describe 'guest and user access rights' do
@@ -46,14 +45,6 @@ RSpec.describe BusinessesController, type: :controller do
         get :new
         expect(response).to redirect_to root_url
       end
-      # it 'assigns a new business to @business' do
-      #   get :new
-      #   expect(assigns(:business)).to be_a_new(Business)
-      # end
-      # it 'renders the :new template' do
-      #   get :new
-      #   expect(response).to render_template :new
-      # end
     end
 
     describe 'GET #edit' do
@@ -75,48 +66,6 @@ RSpec.describe BusinessesController, type: :controller do
       it 'renders the :edit template' do
         get :edit, id: @business
         expect(response).to render_template :edit
-      end
-    end
-
-    describe 'POST #create' do
-      context 'with valid attributes' do
-        before(:each) do
-          @category = create(:category)
-        end
-        it 'does not allow guests to create a busines' do
-          sign_out :user
-          expect {
-            post :create, business: attributes_for(:business, category_id: @category.id)
-          }.not_to change(Business, :count)
-        end
-        it 'allows users to create a busines' do
-          sign_out :user
-          sign_in user2 = create(:user)
-          expect {
-            post :create, business: attributes_for(:business, category_id: @category.id)
-          }.to change(Business, :count).by(1)
-        end
-        it 'saves the new business in the database' do
-          expect {
-            post :create, business: attributes_for(:business, category_id: @category.id)
-          }.to change(Business, :count).by(1)
-        end
-        it 'redirects to business#show' do
-          post :create, business: attributes_for(:business, category_id: @category.id)
-          expect(response).to redirect_to business_path(assigns[:business])
-        end
-      end
-
-      context 'with invalid attributes' do
-        it 'does not save the new business in the database' do
-          expect {
-            post :create, business: attributes_for(:invalid_business)
-          }.not_to change(Business, :count)
-        end
-        it 're-renders the :new template' do
-          post :create, business: attributes_for(:invalid_business)
-          expect(response).to render_template :new
-        end
       end
     end
 
@@ -147,19 +96,6 @@ RSpec.describe BusinessesController, type: :controller do
         it "redirectes to the updated business" do
           patch :update, id: @business, business: attributes_for(:business)
           expect(response).to redirect_to @business
-        end
-      end
-
-      context 'with invalid attributes' do
-        it "does not change the business' attributes" do
-          biz_name = @business.name
-          patch :update, id: @business, business: attributes_for(:invalid_business)
-          @business.reload
-          expect(@business.name).to eq(biz_name)
-        end
-        it 're-renders the :edit template' do
-          patch :update, id: @business, business: attributes_for(:invalid_business)
-          expect(response).to render_template :edit
         end
       end
     end
