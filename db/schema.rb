@@ -28,23 +28,12 @@ ActiveRecord::Schema.define(version: 20160701034815) do
 
   create_table "businesses", force: :cascade do |t|
     t.string   "name"
-    t.integer  "category_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.string   "slug"
   end
 
-  add_index "businesses", ["category_id"], name: "index_businesses_on_category_id", using: :btree
   add_index "businesses", ["slug"], name: "index_businesses_on_slug", unique: true, using: :btree
-
-  create_table "categories", force: :cascade do |t|
-    t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string   "slug"
-  end
-
-  add_index "categories", ["slug"], name: "index_categories_on_slug", unique: true, using: :btree
 
   create_table "comments", force: :cascade do |t|
     t.string   "content"
@@ -69,18 +58,6 @@ ActiveRecord::Schema.define(version: 20160701034815) do
   add_index "friendly_id_slugs", ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type", using: :btree
   add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id", using: :btree
   add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
-
-  create_table "reviews", force: :cascade do |t|
-    t.integer  "rating"
-    t.string   "description"
-    t.integer  "user_id"
-    t.integer  "business_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-  end
-
-  add_index "reviews", ["business_id"], name: "index_reviews_on_business_id", using: :btree
-  add_index "reviews", ["user_id"], name: "index_reviews_on_user_id", using: :btree
 
   create_table "trips", force: :cascade do |t|
     t.string   "title"
@@ -120,10 +97,7 @@ ActiveRecord::Schema.define(version: 20160701034815) do
 
   add_foreign_key "business_trips", "businesses"
   add_foreign_key "business_trips", "trips"
-  add_foreign_key "businesses", "categories"
   add_foreign_key "comments", "trips"
   add_foreign_key "comments", "users"
-  add_foreign_key "reviews", "businesses"
-  add_foreign_key "reviews", "users"
   add_foreign_key "trips", "users"
 end

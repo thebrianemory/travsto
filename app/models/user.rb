@@ -7,7 +7,6 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :username, :email
   validates :username, format: { with: /\A[a-z0-9]{6,15}\z/i }
   has_many :trips, dependent: :destroy
-  has_many :reviews, dependent: :destroy
   has_many :comments
   enum role: [:user, :admin]
 

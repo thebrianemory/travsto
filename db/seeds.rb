@@ -34,32 +34,10 @@ User.create(
   password_confirmation: 'password'
 )
 
-### Categories ###
-Category.create(
-  name: "Restaurants"
-)
-Category.create(
-  name: "Hotels"
-)
-Category.create(
-  name: "Attractions"
-)
-
 ### Businesses ###
 10.times do
   Business.create(
-    name: Faker::Company::name,
-    category_id: Faker::Number.between(1, 3)
-  )
-end
-
-### Reviews ###
-25.times do
-  review = Review.create(
-    description: Faker::Hipster.sentence,
-    rating: Faker::Number.between(1, 5),
-    user_id: Faker::Number.between(1, 4),
-    business_id: Faker::Number.between(1, 10)
+    name: Faker::Company::name
   )
 end
 

@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:my_trips, :my_reviews]
+  before_action :set_user, only: [:my_trips]
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   def index
@@ -14,10 +14,6 @@ class UsersController < ApplicationController
 
   def my_trips
     @my_trips = @user.trips
-  end
-
-  def my_reviews
-    @my_reviews = @user.reviews
   end
 
   private
