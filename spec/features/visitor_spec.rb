@@ -1,13 +1,6 @@
 require 'rails_helper'
 
 feature 'Visitor expectations' do
-  scenario 'a visitor can view the business index', js: false do
-    visit root_path
-    click_link 'Businesses'
-    within 'h1' do
-      expect(page).to have_content 'Business Index'
-    end
-  end
 
   scenario 'a visitor can view the trips index', js: false do
     visit root_path

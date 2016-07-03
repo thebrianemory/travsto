@@ -1,4 +1,9 @@
 class BusinessPolicy < ApplicationPolicy
+
+  def index?
+    user.admin? unless !user
+  end
+
   def destroy?
     user.admin? unless !user
   end

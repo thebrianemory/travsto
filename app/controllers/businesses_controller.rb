@@ -4,6 +4,7 @@ class BusinessesController < ApplicationController
 
   def index
     @businesses = Business.all
+    authorize Business
   end
 
   def show

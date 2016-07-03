@@ -17,7 +17,6 @@
         <% if current_user %>
           <li><%= link_to 'Welcome, ' + current_user.username + '!' %></li>
         <% end %>
-        <li><%= link_to 'Businesses', businesses_path %></li>
         <li><%= link_to 'Trips', trips_path %></li>
         <% if !current_user %>
         <li><%= link_to 'Log In', new_user_session_path %></li>

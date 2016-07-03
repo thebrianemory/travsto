@@ -5,12 +5,6 @@ feature 'User expectations' do
     sign_in create(:user)
     visit root_path
   end
-  scenario 'a user can view the business index', js: false do
-    click_link 'Businesses'
-    within 'h1' do
-      expect(page).to have_content 'Business Index'
-    end
-  end
 
   scenario 'a user can view the trips index', js: false do
     click_link 'Trips'

@@ -7,14 +7,11 @@ RSpec.describe BusinessesController, type: :controller do
 
   describe 'guest and user access rights' do
     describe 'GET #index' do
-      it 'populates an array of all businesses' do
-        business2 = create(:business)
+      it 'only admins can view index' do
+        sign_out :user
+        sign_in create(:user)
         get :index
-        expect(assigns(:businesses)).to match_array([@business, business2])
-      end
-      it 'renders the :index template' do
-        get :index
-        expect(response).to render_template :index
+        expect(response).to redirect_to root_path
       end
     end
 
@@ -32,6 +29,22 @@ RSpec.describe BusinessesController, type: :controller do
 
   describe 'admin access rights' do
     login_admin
+
+    describe 'GET #index' do
+      it 'allows admins to access business index' do
+        get :index
+        expect(response).to render_template :index
+      end
+      it 'populates an array of all businesses' do
+        business2 = create(:business)
+        get :index
+        expect(assigns(:businesses)).to match_array([@business, business2])
+      end
+      it 'renders the :index template' do
+        get :index
+        expect(response).to render_template :index
+      end
+    end
 
     describe 'GET #new' do
       it 'does not allow guests to visit the new business page' do
