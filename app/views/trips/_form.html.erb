@@ -26,15 +26,6 @@
       <%= f.fields_for :businesses, @trip.businesses.build do |biz_fields| %>
         <%= biz_fields.label :name %>
         <%= biz_fields.text_field :name %>
-
-        <p>
-          <%= biz_fields.label :category %>
-          <%= biz_fields.collection_radio_buttons :category_id, Category.all, :id, :name do |c| %>
-            <%= c.label do %>
-              <%= c.radio_button + c.text %>
-            <% end %>
-          <% end %>
-        </p>
       <% end %>
     </p>
 

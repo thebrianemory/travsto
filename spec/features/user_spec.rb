@@ -43,7 +43,7 @@ feature 'User expectations' do
     expect(page).to have_content "Create a new trip"
   end
 
-  scenario 'a user can create a new trip' do
+  scenario 'a user can create a new trip with a current business' do
     biz = create(:business)
     expect {
       click_link 'Account'

@@ -46,14 +46,14 @@ RSpec.describe BusinessesController, type: :controller do
         get :new
         expect(response).to redirect_to root_url
       end
-      it 'assigns a new business to @business' do
-        get :new
-        expect(assigns(:business)).to be_a_new(Business)
-      end
-      it 'renders the :new template' do
-        get :new
-        expect(response).to render_template :new
-      end
+      # it 'assigns a new business to @business' do
+      #   get :new
+      #   expect(assigns(:business)).to be_a_new(Business)
+      # end
+      # it 'renders the :new template' do
+      #   get :new
+      #   expect(response).to render_template :new
+      # end
     end
 
     describe 'GET #edit' do
@@ -89,12 +89,12 @@ RSpec.describe BusinessesController, type: :controller do
             post :create, business: attributes_for(:business, category_id: @category.id)
           }.not_to change(Business, :count)
         end
-        it 'does not allow users to create a busines' do
+        it 'allows users to create a busines' do
           sign_out :user
           sign_in user2 = create(:user)
           expect {
             post :create, business: attributes_for(:business, category_id: @category.id)
-          }.not_to change(Business, :count)
+          }.to change(Business, :count).by(1)
         end
         it 'saves the new business in the database' do
           expect {

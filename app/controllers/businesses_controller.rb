@@ -9,21 +9,6 @@ class BusinessesController < ApplicationController
   def show
   end
 
-  def new
-    @business = Business.new
-    authorize @business
-  end
-
-  def create
-    @business = Business.new(business_params)
-    authorize @business
-    if @business.save
-      redirect_to business_path(@business)
-    else
-      render :new
-    end
-  end
-
   def edit
     authorize @business
   end

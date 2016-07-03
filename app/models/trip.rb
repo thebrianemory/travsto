@@ -6,9 +6,14 @@ class Trip < ActiveRecord::Base
   validates_presence_of :title, :description, :user_id
   validates :title, length: 5..50
   validates :description, length: { minimum: 100 }
+  accepts_nested_attributes_for :businesses, reject_if: :attributes_blank?
 
   extend FriendlyId
   friendly_id :title, use: :slugged
+
+  def attributes_blank?(attrs)
+    attrs.except('id').values.all?(&:blank?)
+  end
 
   def businesses_attributes=(business_attributes)
     business_attributes.values.each do |business_attribute|
