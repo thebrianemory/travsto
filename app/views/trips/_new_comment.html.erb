@@ -1,0 +1,7 @@
+<%= form_for Comment.new do |f| %>
+  <%= render 'shared/error_messages' %>
+    <p><%= f.text_area :content %></p>
+    <%= f.hidden_field :user_id, value: current_user.id %>
+    <%= f.hidden_field :trip_id, value: @trip.id %>
+  <p><%= f.submit "Add Comment", class: 'btn btn-sm btn-primary' %></p>
+<% end %>

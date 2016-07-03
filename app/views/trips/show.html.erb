@@ -1,2 +1,18 @@
-<h2>Trip show page</h2>
-<%= @trip.title %>
+<h2><%= @trip.title %></h2>
+<p>by <%= link_to @trip.user.username, mytrips_path(@trip.user) %></p>
+<p><%= @trip.description %></p>
+<h4>Places I visited</h4>
+<% @trip.businesses.each do |biz| %>
+  <ul>
+    <li><%= biz.name %></li>
+  </ul>
+<% end %>
+<div id="comments" class="well col-md-4">
+  <%= label_tag "Leave a comment" %> <br>
+  <%= render partial: 'new_comment' %>
+  <% @trip.comments.each do |comment| %>
+  <div class="well">
+    <%= comment.content %>
+  </div>
+  <% end %>
+</div>

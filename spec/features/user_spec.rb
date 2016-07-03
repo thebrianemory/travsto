@@ -48,4 +48,40 @@ feature 'User expectations' do
       click_button 'Add Trip'
     }.to change(Trip, :count).by(1)
   end
+
+  scenario 'a user can create a new trip with a new business' do
+    expect {
+      click_link 'Account'
+      click_link 'Add Trip'
+      fill_in 'Title', with: 'This is my trip to Hawaii'
+      fill_in 'Description', with: 'I need...I need...I need... fish fingers and custard! I never know why. I only know who. Come along, Pond! There are fixed points throughout time where things must stay exactly the way they are. This is not one of them. This is an opportunity!'
+      fill_in 'Name', with: 'Hula Dog'
+      click_button 'Add Trip'
+    }.to change(Trip, :count).by(1)
+  end
+
+  scenario 'a user can create a new trip with a current and a new business' do
+    expect {
+      biz = create(:business)
+      click_link 'Account'
+      click_link 'Add Trip'
+      fill_in 'Title', with: 'This is my trip to Hawaii'
+      fill_in 'Description', with: 'I need...I need...I need... fish fingers and custard! I never know why. I only know who. Come along, Pond! There are fixed points throughout time where things must stay exactly the way they are. This is not one of them. This is an opportunity!'
+      check("#{biz.name}")
+      fill_in 'Name', with: 'Hula Dog'
+      click_button 'Add Trip'
+    }.to change(Trip, :count).by(1)
+  end
+
+  scenario "a user can see a trip's title, description, and places visited" do
+    trip = create(:trip)
+    trip.businesses << create(:business)
+    trip.businesses << create(:business)
+    visit trip_path(trip)
+    expect(page).to have_content trip.title
+    expect(page).to have_content trip.description
+    expect(Business.count).to eq 2
+    expect(page).to have_content trip.businesses.first.name
+    expect(page).to have_content trip.businesses.last.name
+  end
 end
