@@ -3,8 +3,7 @@ require 'rails_helper'
 RSpec.describe BusinessTrip, type: :model do
   before(:each) do
     @user = create(:user)
-    @category = create(:category)
-    @business = create(:business, category_id: @category.id)
+    @business = create(:business)
     @trip = create(:trip, user_id: @user.id)
     @business_trip = create(:business_trip, trip_id: @trip.id, business_id: @business.id)
   end
