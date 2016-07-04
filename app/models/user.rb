@@ -15,18 +15,18 @@ class User < ActiveRecord::Base
   friendly_id :username, use: :slugged
 
   def self.from_omniauth(auth)
-    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-      user.provider = auth.provider
-      user.uid = auth.uid
-      user.email = auth.info.email
+    where(provider: auth.provider, uid: auth.uid).first_or_create do |user_info|
+      user_info.provider = auth.provider
+      user_info.uid = auth.uid
+      user_info.email = auth.info.email
       fullname = auth.info.name.split
-      user.first_name = fullname.first
-      user.last_name = fullname.last
-      user.username = auth.info.email.split("@")[0] + Faker::Number.between(1, 999).to_s
-      user.password = Devise.friendly_token[0,20]
-      user.password_confirmation = user.password
-      user.role = 0
-      user.save!
+      user_info.first_name = fullname.first
+      user_info.last_name = fullname.last
+      user_info.username = auth.info.email.split("@")[0] + Faker::Number.between(1, 999).to_s
+      user_info.password = Devise.friendly_token[0,20]
+      user_info.password_confirmation = user_info.password
+      user_info.role = 0
+      user_info.save!
     end
   end
 
