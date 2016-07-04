@@ -1,3 +1,49 @@
 // Place all the styles related to the welcome controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.main-header {
+  background: linear-gradient(
+    rgba(0, 0, 0, 0.5),
+    rgba(0, 0, 0, 0.5)
+  ), url('/assets/header3a.jpg') center no-repeat;
+  height: 768px;
+  margin-top: -20px;
+  margin-bottom: -20px;
+}
+
+@media all and (max-width: 768px) and (min-width: 200px) {
+  .main-header {
+    background: linear-gradient(
+      rgba(0, 0, 0, 0.5),
+      rgba(0, 0, 0, 0.5)
+    ), url('/assets/header-mobile.jpg') left top no-repeat;
+    height: 470px;
+    right: 80%;
+    margin-top: -20px;
+    margin-bottom: -20px;
+  }
+}
+
+.title {
+  position: relative;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  text-align: center;
+}
+
+.header-h1 {
+  text-transform: uppercase;
+  margin: 0;
+  font-size: 3em;
+  white-space: nowrap;
+  color: white;
+}
+
+.header-h4 {
+  margin: 0;
+  font-size: 1.5em;
+  color: white;
+}
