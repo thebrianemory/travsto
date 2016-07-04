@@ -93,7 +93,7 @@ RSpec.describe CommentsController, type: :controller do
         end
         it 'redirects to comment#show' do
           post :create, comment: attributes_for(:comment, user_id: @user.id, trip_id: @trip.id)
-          expect(response).to redirect_to trip_path(assigns[:comment].trip_id)
+          expect(response).to redirect_to trip_path(assigns[:comment].trip.slug)
         end
       end
 
@@ -136,7 +136,7 @@ RSpec.describe CommentsController, type: :controller do
         end
         it "redirectes to the updated comment" do
           patch :update, id: @comment, comment: attributes_for(:comment)
-          expect(response).to redirect_to trip_path(@comment.trip_id)
+          expect(response).to redirect_to trip_path(@comment.trip.slug)
         end
       end
 

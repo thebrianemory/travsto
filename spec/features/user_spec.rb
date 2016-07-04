@@ -84,4 +84,16 @@ feature 'User expectations' do
     expect(page).to have_content trip.businesses.first.name
     expect(page).to have_content trip.businesses.last.name
   end
+
+  scenario "a user can add a comment" do
+    trip = create(:trip)
+    trip.businesses << create(:business)
+    trip.businesses << create(:business)
+    visit trip_path(trip)
+    expect(page).to have_content trip.title
+    expect(page).to have_content trip.description
+    expect(Business.count).to eq 2
+    expect(page).to have_content trip.businesses.first.name
+    expect(page).to have_content trip.businesses.last.name
+  end
 end

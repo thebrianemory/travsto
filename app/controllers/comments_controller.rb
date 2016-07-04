@@ -20,7 +20,7 @@ class CommentsController < ApplicationController
     @comment = Comment.new(comment_params)
     authorize @comment
     if @comment.save
-      redirect_to trip_path(@comment.trip_id)
+      redirect_to trip_path(@comment.trip.slug)
     else
       render :new
     end
@@ -33,7 +33,7 @@ class CommentsController < ApplicationController
   def update
     authorize @comment
     if @comment.update(comment_params)
-      redirect_to trip_path(@comment.trip_id)
+      redirect_to trip_path(@comment.trip.slug)
     else
       render :edit
     end
