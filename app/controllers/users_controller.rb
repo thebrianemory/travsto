@@ -9,7 +9,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.friendly.find(params[:id])
-    redirect_to root_url unless current_user.role == "admin" || @user == current_user
+    authorize @user
   end
 
   def my_trips
