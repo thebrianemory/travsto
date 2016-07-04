@@ -21,6 +21,7 @@ feature 'Visitor expectations' do
       find('#password').fill_in 'Password', with: 'Batword1'
       find('#password_confirmation').fill_in 'Password confirmation',
         with: 'Batword1'
+        save_and_open_page
       click_button 'Sign Up'
     }.to change(User, :count).by(1)
     expect(current_path).to eq user_path(User.last)
@@ -39,5 +40,11 @@ feature 'Visitor expectations' do
     fill_in 'Password', with: user.password
     click_button 'Log In'
     expect(page).to have_content 'Signed in successfully.'
+  end
+
+  scenario 'a visitor can sign in with Facebook' do
+    expect {
+
+    }
   end
 end
