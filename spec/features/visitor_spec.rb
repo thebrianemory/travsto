@@ -21,13 +21,12 @@ feature 'Visitor expectations' do
       find('#password').fill_in 'Password', with: 'Batword1'
       find('#password_confirmation').fill_in 'Password confirmation',
         with: 'Batword1'
-        save_and_open_page
       click_button 'Sign Up'
     }.to change(User, :count).by(1)
     expect(current_path).to eq user_path(User.last)
     expect(page).to have_content 'Welcome! You have signed up successfully.'
-    within 'h1' do
-      expect(page).to have_content 'User Profile Page'
+    within 'h2' do
+      expect(page).to have_content "Welcome, #{User.last.username}"
     end
     expect(page).to have_content 'batman'
   end

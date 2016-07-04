@@ -41,7 +41,7 @@ RSpec.describe User, type: :model do
     before(:each) do
       @user = create(:user)
     end
-    it "has a username between 6 and 15 characters" do
+    it "has a username between 6 and 20 characters" do
       @user.username = 'bobbyjohnson'
       expect(@user).to be_valid
     end
@@ -49,8 +49,8 @@ RSpec.describe User, type: :model do
       @user.username = 'bobby'
       expect(@user).to_not be_valid
     end
-    it "it cannot have a username more than 15 characters" do
-      @user.username = 'bobbyjohnson1234'
+    it "it cannot have a username more than 20 characters" do
+      @user.username = 'bobbyjohnson123412312'
       expect(@user).to_not be_valid
     end
       it 'cannot have spaces' do
