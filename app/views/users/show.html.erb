@@ -1,2 +1,10 @@
-<h1>User Profile Page</h1>
-<h2>Welcome, <%= @user.username %>!</h2>
+<h2>Welcome, <%= @user.username %>!
+  <% if @user.admin? %>
+    (admin)
+  <% end %></h2>
+<h4>First name: <%= @user.first_name %></h4>
+<h4>Last name: <%= @user.last_name %></h4>
+<h4>Email: <%= @user.email %></h4>
+<% if @user.provider %>
+  <h4>Connected with: <%= @user.provider.titleize %></h4>
+<% end %>

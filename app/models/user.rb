@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
          :omniauthable, :omniauth_providers => [:facebook]
   validates_presence_of :first_name, :last_name, :email, :username, :password, :password_confirmation
   validates_uniqueness_of :username, :email
-  validates :username, format: { with: /\A[a-z0-9]{6,15}\z/i }
+  validates :username, format: { with: /\A[a-z0-9.]{6,20}\z/i }
   has_many :trips, dependent: :destroy
   has_many :comments
   enum role: [:user, :admin]
@@ -19,7 +19,14 @@ class User < ActiveRecord::Base
       user.provider = auth.provider
       user.uid = auth.uid
       user.email = auth.info.email
+      fullname = auth.info.name.split
+      user.first_name = fullname.first
+      user.last_name = fullname.last
+      user.username = auth.info.email.split("@")[0] + Faker::Number.between(1, 999).to_s
       user.password = Devise.friendly_token[0,20]
+      user.password_confirmation = user.password
+      user.role = 0
+      user.save!
     end
   end
 
