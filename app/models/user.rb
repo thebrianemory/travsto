@@ -22,7 +22,7 @@ class User < ActiveRecord::Base
       fullname = auth.info.name.split
       user_info.first_name = fullname.first
       user_info.last_name = fullname.last
-      user_info.username = auth.info.email.split("@")[0] + Faker::Number.between(1, 999).to_s
+      user_info.username = auth.info.email.split("@")[0].gsub(/[.]/, '') + Faker::Number.between(1, 999).to_s
       user_info.password = Devise.friendly_token[0,20]
       user_info.password_confirmation = user_info.password
       user_info.role = 0
