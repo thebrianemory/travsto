@@ -1,7 +1,14 @@
 <div class="container">
   <div class="well col-md-6">
     <h2>Log in</h2>
-
+    <p>
+      Enter your details or
+      <%- if devise_mapping.omniauthable? %>
+        <%- resource_class.omniauth_providers.each do |provider| %>
+          <%= link_to " log in with #{OmniAuth::Utils.camelize(provider)}", omniauth_authorize_path(resource_name, provider), class: "btn btn-xs btn-primary btn-fb" %><br />
+        <% end -%>
+      <% end -%>
+    </p>
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
     <%= render 'shared/devise_error_messages', object: f.object %>
       <div class="field">
