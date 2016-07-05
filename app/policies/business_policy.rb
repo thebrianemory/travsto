@@ -1,26 +1,4 @@
 class BusinessPolicy < ApplicationPolicy
-
-  def index?
-    user.admin? unless !user
-  end
-
-  def destroy?
-    user.admin? unless !user
-  end
-
-  def new?
-    user || user.admin? unless !user
-  end
-
-  def create?
-    user || user.admin? unless !user
-  end
-
-  def edit?
-    user.admin? unless !user
-  end
-
-  def update?
-    user.admin? unless !user
-  end
+  permit_admin_to :index, :destroy, :edit, :update
+  permit_admin_or_user_to :new, :create
 end

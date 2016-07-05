@@ -1,21 +1,4 @@
 class TripPolicy < ApplicationPolicy
-  def destroy?
-    record.user_id == user.id || user.admin? unless !user
-  end
-
-  def new?
-    user || user.admin? unless !user
-  end
-
-  def create?
-    user || user.admin? unless !user
-  end
-
-  def edit?
-    record.user_id == user.id || user.admin? unless !user
-  end
-
-  def update?
-    record.user_id == user.id || user.admin? unless !user
-  end
+  permit_admin_or_user_to :new, :create
+  permit_admin_or_user_on_record_to :destroy, :edit, :update
 end

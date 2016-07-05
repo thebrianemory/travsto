@@ -1,9 +1,4 @@
 class UserPolicy < ApplicationPolicy
-  def show?
-    record.id == user.id || user.admin? unless !user
-  end
-
-  def index?
-    user.admin? unless !user
-  end
+  permit_admin_to :index
+  permit_admin_or_users_record_to :show
 end

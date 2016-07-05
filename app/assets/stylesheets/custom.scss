@@ -18,5 +18,13 @@
 }
 
 .alert {
-  width: 280px;
+  margin: -20px 0 20px 0;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.alert-devise {
+  margin: 0 !important;
+  font-weight: bold;
+  font-size: 1.1em;
 }
