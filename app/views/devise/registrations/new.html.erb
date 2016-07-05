@@ -5,42 +5,42 @@
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
       <%= render 'shared/devise_error_messages', object: f.object %>
 
-      <p>
+      <div class="field">
         <%= f.label :first_name %><br />
         <%= f.text_field :first_name, autofocus: true %>
-      </p>
+      </div>
 
-      <p>
+      <div class="field">
         <%= f.label :last_name %><br />
         <%= f.text_field :last_name %>
-      </p>
+      </div>
 
-      <p>
+      <div class="field">
         <%= f.label :username %><br />
         <%= f.text_field :username %>
-      </p>
+      </div>
 
-      <p>
+      <div class="field">
         <%= f.label :email %><br />
         <%= f.email_field :email %>
-      </p>
+      </div>
 
-      <p id="password">
-        <%= f.label :password%>
+      <div class="field" id="password">
+        <%= f.label :password %>
         <% if @minimum_password_length %>
         <em>(<%= @minimum_password_length %> characters minimum)</em>
         <% end %><br />
         <%= f.password_field :password, autocomplete: "off" %>
-      </p>
+      </div>
 
-      <p id="password_confirmation">
+      <div class="field" id="password_confirmation">
         <%= f.label :password_confirmation %><br />
         <%= f.password_field :password_confirmation, autocomplete: "off" %>
-      </p>
+      </div>
 
-      <p class="actions">
-        <%= f.submit "Sign Up" %>
-      </p>
+      <div class="actions">
+        <%= f.submit "Sign Up", class: "btn btn-sm btn-primary" %>
+      </div>
     <% end %>
 
     <%= render "devise/shared/links" %>

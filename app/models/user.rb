@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, :omniauth_providers => [:facebook]
-  validates_presence_of :first_name, :last_name, :email, :username, :password, :password_confirmation
+  validates_presence_of :first_name, :last_name, :username
   validates_uniqueness_of :username, :email
   validates :username, format: { with: /\A[a-z0-9.]{6,20}\z/i }
   has_many :trips, dependent: :destroy
