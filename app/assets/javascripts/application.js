@@ -15,6 +15,7 @@
 //= require bootstrap
 //= require turbolinks
 //= require_tree .
+//= require local_time
 window.setTimeout(function() {
     $(".alert").remove()
 }, 3000);
