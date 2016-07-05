@@ -1,6 +1,12 @@
-<h1>Trip Index</h1>
-<% @trips.each do |trip| %>
-  <ul>
-    <li><%= link_to trip.title, trip_path(trip) %></li>
-  </ul>
-<% end %>
+<div class="container">
+  <div class="col-md-8">
+    <h1>Browse Trips</h1>
+    <% @trips.each do |trip| %>
+      <div class="col-md-12">
+        <p><span class="trip-title"><%= link_to trip.title, trip_path(trip) %></span> by
+        <%= link_to trip.user.name, mytrips_path(trip.user)  %></p>
+        <p><%= truncate(trip.description, length: 150) %> <%= link_to "Read More", trip_path(trip) %></p>
+      </div>
+    <% end %>
+  </div>
+</div>

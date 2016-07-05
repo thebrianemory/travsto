@@ -45,7 +45,7 @@ end
 5.times do
   trip = Trip.create(
     title: Faker::Company.catch_phrase,
-    description: Faker::Hipster.paragraph,
+    description: Faker::Hipster.paragraph + "\n" + Faker::Hipster.paragraph + "\n" + Faker::Hipster.paragraph + "\n" + Faker::Hipster.paragraph,
     user_id: Faker::Number.between(1, 4)
   )
   3.times do
