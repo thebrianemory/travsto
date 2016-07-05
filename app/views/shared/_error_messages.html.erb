@@ -1,6 +1,6 @@
 <% if @trip.errors.any? %>
   <div id="error_explanation">
-    <div class="alert alert-danger">
+    <div class="alert alert-danger alert-devise">
       The form contains <%= pluralize(@trip.errors.count, "error") %>.
     </div>
     <ul>
