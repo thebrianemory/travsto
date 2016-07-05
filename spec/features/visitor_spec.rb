@@ -6,7 +6,7 @@ feature 'Visitor expectations' do
     visit root_path
     click_link 'Trips'
     within 'h1' do
-      expect(page).to have_content 'Trip Index'
+      expect(page).to have_content 'Browse Trips'
     end
   end
 

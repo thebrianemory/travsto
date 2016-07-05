@@ -9,7 +9,7 @@ feature 'User expectations' do
   scenario 'a user can view the trips index', js: false do
     click_link 'Trips'
     within 'h1' do
-      expect(page).to have_content 'Trip Index'
+      expect(page).to have_content 'Browse Trips'
     end
   end
 
@@ -90,10 +90,8 @@ feature 'User expectations' do
     trip.businesses << create(:business)
     trip.businesses << create(:business)
     visit trip_path(trip)
-    expect(page).to have_content trip.title
-    expect(page).to have_content trip.description
-    expect(Business.count).to eq 2
-    expect(page).to have_content trip.businesses.first.name
-    expect(page).to have_content trip.businesses.last.name
+    fill_in 'Leave a comment', with: 'This is really cool'
+    click_button 'Add Comment'
+    expect(trip.comments.count).to eq 1
   end
 end

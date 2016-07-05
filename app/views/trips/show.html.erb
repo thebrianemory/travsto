@@ -12,7 +12,6 @@
     <% end %>
   </div>
   <div id="comments" class="well col-md-6">
-    <%= label_tag "Leave a comment" %> <br>
     <% if current_user %>
       <%= render partial: 'new_comment' %>
     <% else %>
