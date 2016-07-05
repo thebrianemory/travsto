@@ -1,9 +1,10 @@
 <div class="container">
-  <div class="col-md-7">
+  <div class="col-md-10">
     <h2><%= @user.username + "'s trips" %></h2>
     <% @my_trips.each do |trip| %>
-      <div class="col-md-10">
+      <div class="well well-white">
         <h4><%= link_to trip.title, trip_path(trip) %></h4>
+        <p><%= truncate(trip.description, length: 250) %> <%= link_to "Read More", trip_path(trip) %></p>
       </div>
     <% end %>
   </div>
