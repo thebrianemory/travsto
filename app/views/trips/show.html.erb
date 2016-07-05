@@ -1,18 +1,27 @@
-<h2><%= @trip.title %></h2>
-<p>by <%= link_to @trip.user.username, mytrips_path(@trip.user) %></p>
-<p><%= @trip.description %></p>
-<h4>Places I visited</h4>
-<% @trip.businesses.each do |biz| %>
-  <ul>
-    <li><%= biz.name %></li>
-  </ul>
-<% end %>
-<div id="comments" class="well col-md-4">
-  <%= label_tag "Leave a comment" %> <br>
-  <%= render partial: 'new_comment' %>
-  <% @trip.comments.each do |comment| %>
-  <div class="well">
-    <%= comment.content %>
+<div class="container">
+  <div class="col-md-8">
+    <h2><%= @trip.title %></h2>
+    <p>by <%= link_to @trip.user.username, mytrips_path(@trip.user) %></p>
+    <p><%= @trip.description %></p>
+    <hr>
+    <h4>Places I visited</h4>
+    <% @trip.businesses.each do |biz| %>
+      <ul>
+        <li><%= biz.name %></li>
+      </ul>
+    <% end %>
   </div>
-  <% end %>
+  <div id="comments" class="well col-md-6">
+    <%= label_tag "Leave a comment" %> <br>
+    <% if current_user %>
+      <%= render partial: 'new_comment' %>
+    <% else %>
+      <%= link_to "You must be logged in to leave a comment.", new_user_session_path %>
+    <% end %>
+    <% @trip.comments.each do |comment| %>
+    <div class="<%= cycle('well well-white', 'well') %>">
+      <%= comment.content %>
+    </div>
+    <% end %>
+  </div>
 </div>
