@@ -1,10 +1,17 @@
-<h2>Welcome, <%= @user.username %>!
-  <% if @user.admin? %>
-    (admin)
-  <% end %></h2>
-<h4>First name: <%= @user.first_name %></h4>
-<h4>Last name: <%= @user.last_name %></h4>
-<h4>Email: <%= @user.email %></h4>
-<% if @user.provider %>
-  <h4>Connected with: <%= @user.provider.titleize %></h4>
-<% end %>
+<div class="container">
+  <div class="col-md-8">
+    <h2>Welcome, <%= @user.username %>!
+      <% if @user.admin? %>
+        (admin)
+      <% end %></h2>
+    <h4>First name: <%= @user.first_name %></h4>
+    <h4>Last name: <%= @user.last_name %></h4>
+    <h4>Email: <%= @user.email %></h4>
+    <% if @user.provider %>
+      <h4>Connected with: <%= @user.provider.titleize %></h4>
+    <% else %>
+      <%= link_to " Connect with Facebook", '/auth/facebook', class: "btn btn-xs btn-primary btn-fb" %>
+    <% end %>
+
+  </div>
+</div>
