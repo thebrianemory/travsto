@@ -1,5 +1,6 @@
 class BusinessesController < ApplicationController
   before_action :set_business, only: [:show, :edit, :update, :destroy]
+  before_action :authorize_business, only: [:edit, :update, :destroy]
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   def index
@@ -15,11 +16,9 @@ class BusinessesController < ApplicationController
   end
 
   def edit
-    authorize @business
   end
 
   def update
-    authorize @business
     if @business.update(business_params)
       redirect_to @business
     else
@@ -28,7 +27,6 @@ class BusinessesController < ApplicationController
   end
 
   def destroy
-    authorize @business
     @business.destroy
     redirect_to businesses_path
   end
@@ -40,5 +38,9 @@ class BusinessesController < ApplicationController
 
   def business_params
     params.require(:business).permit(:name)
+  end
+
+  def authorize_business
+    authorize @business
   end
 end

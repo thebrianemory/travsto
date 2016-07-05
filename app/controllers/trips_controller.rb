@@ -1,5 +1,6 @@
 class TripsController < ApplicationController
   before_action :set_trip, only: [:show, :edit, :update, :destroy]
+  before_action :authorize_trip, only: [:edit, :update, :destroy]
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   def index
@@ -8,13 +9,13 @@ class TripsController < ApplicationController
 
   def new
     @trip = Trip.new
-    authorize @trip
+    authorize_trip
   end
 
   def create
     @trip = Trip.new(trip_params)
     @trip.user = current_user
-    authorize @trip
+    authorize_trip
     if @trip.save
       redirect_to trip_path(@trip)
     else
@@ -26,11 +27,9 @@ class TripsController < ApplicationController
   end
 
   def edit
-    authorize @trip
   end
 
   def update
-    authorize @trip
     if @trip.update(trip_params)
       redirect_to @trip
     else
@@ -39,7 +38,6 @@ class TripsController < ApplicationController
   end
 
   def destroy
-    authorize @trip
     @trip.destroy
     redirect_to trips_path
   end
@@ -51,5 +49,9 @@ class TripsController < ApplicationController
 
   def trip_params
     params.require(:trip).permit(:title, :description, :user_id, business_ids:[], businesses_attributes: [:name])
+  end
+
+  def authorize_trip
+    authorize @trip
   end
 end

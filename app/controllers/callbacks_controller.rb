@@ -2,8 +2,7 @@ class CallbacksController < Devise::OmniauthCallbacksController
     def facebook
       if request.env["omniauth.auth"].info.email.blank?
         redirect_to "/auth/facebook?auth_type=rerequest&scope=email"
-      elsif User.find_by(email: request.env["omniauth.auth"].info.email)
-        user = User.find_by(email: request.env["omniauth.auth"].info.email)
+      elsif user = User.find_by(email: request.env["omniauth.auth"].info.email)
         user.update(uid: request.env["omniauth.auth"].uid)
         user.update(provider: request.env["omniauth.auth"].provider)
         user.save
