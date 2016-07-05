@@ -20,6 +20,7 @@
     <% end %>
     <% @trip.comments.each do |comment| %>
     <div class="<%= cycle('well well-white', 'well') %>">
+      Posted by <strong><%= comment.user.username %></strong> at <strong><%= comment.created_at.strftime("%b %d, %Y, %l:%M %p") %></strong> <br>
       <%= comment.content %>
     </div>
     <% end %>
