@@ -6,15 +6,14 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
-<!-- <% if controller_name == "welcome" %>
-  <body class="body--change">
-<% else %> -->
-  <body>
-<!-- <% end %> -->
+<body>
 
 <%= render 'layouts/navigation' %>
-  <%= render 'layouts/flash' %>
+
+<%= render 'layouts/flash' %>
+
 <%= yield %>
+
 <hr>
 <footer class="container">
   <small>&copy; 2016 Developed by <a href="http://www.brianemory.com">Brian Emory</a> | <a href="https://github.com/thebrianemory">GitHub <i class="fa fa-github"></i></a></small>
