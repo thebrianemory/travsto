@@ -13,9 +13,8 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap
-//= require turbolinks
-//= require_tree .
 //= require local_time
+//= require_tree .
 
 window.setTimeout(function() {
     $(".alert").remove()
