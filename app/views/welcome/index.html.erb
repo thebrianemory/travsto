@@ -3,6 +3,10 @@
     <h1 class="header-h1">Travsto</h1>
     <h4 class="header-h4">Share your travel story</h4>
       <br>
-      <a href="/signup"><button class="btn btn-default">Sign up to access more features</button></a>
+      <% if current_user %>
+        <%= link_to "Create Your Story", new_trip_path, class: "btn btn-default" %>
+      <% else %>
+        <%= link_to "Sign up to access more features", new_user_registration_path, class: "btn btn-default" %>
+      <% end %>
   </div>
 </header>
