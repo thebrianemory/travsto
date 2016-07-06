@@ -1,7 +1,7 @@
 class Trip < ActiveRecord::Base
   belongs_to :user
   has_many :comments, dependent: :destroy
-  has_many :business_trips
+  has_many :business_trips, dependent: :destroy
   has_many :businesses, through: :business_trips
   validates_presence_of :title, :description, :user_id
   validates :title, length: 5..50
