@@ -13,7 +13,7 @@
     </p>
 
     <p>
-      <%= f.label 'Places I visited' %> <br>
+      <%= f.label :places_i_visited, 'Places I visited' %> <br>
       <%= f.collection_check_boxes :business_ids, Business.all, :id, :name do |b| %>
         <%= b.label do %>
           <%= b.check_box + b.text unless b.text.blank? %>
@@ -30,7 +30,7 @@
       <button type="button" id="addNewChoice" class="btn btn-xs btn-success">Add another</button>
     </p>
 
-  <p><%= f.submit 'Add Trip', class: 'btn btn-primary' %></p>
+  <p><%= f.submit 'Add Travel Story', class: 'btn btn-primary' %></p>
 
   <div style="display: none;" id="new_choice_form">
       <%= render partial: 'add_business', locals: { f: f } %>

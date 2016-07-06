@@ -1,12 +1,12 @@
 <header class="main-header">
   <div class="title">
     <h1 class="header-h1">Travsto</h1>
-    <h4 class="header-h4">Share your travel story</h4>
+    <h4 class="header-h4">Share your travel story with the world</h4>
       <br>
       <% if current_user %>
         <%= link_to "Create Your Story", new_trip_path, class: "btn btn-default" %>
       <% else %>
-        <%= link_to "Sign up to access more features", new_user_registration_path, class: "btn btn-default" %>
+        <%= link_to "Sign up to create your travel story", new_user_registration_path, class: "btn btn-default" %>
       <% end %>
   </div>
 </header>

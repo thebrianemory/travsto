@@ -2,7 +2,7 @@
   <div class="col-md-8 well">
     <h2>Welcome, <%= @user.username %>!
       <% if @user.admin? %>
-        (admin)
+        <small>(admin)</small>
       <% end %></h2>
     <h4>First name: <%= @user.first_name %></h4>
     <h4>Last name: <%= @user.last_name %></h4>

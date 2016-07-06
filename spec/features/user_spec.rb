@@ -7,9 +7,9 @@ feature 'User expectations' do
   end
 
   scenario 'a user can view the trips index', js: false do
-    click_link 'Trips'
+    click_link 'Travel Stories'
     within 'h1' do
-      expect(page).to have_content 'Browse Trips'
+      expect(page).to have_content 'Browse Travel Stories'
     end
   end
 
@@ -27,36 +27,36 @@ feature 'User expectations' do
 
   scenario 'a user can view their trips page' do
     click_link 'Account'
-    click_link 'My Trips'
-    expect(page).to have_content "#{User.last.username}'s trips"
+    click_link 'My Travel Stories'
+    expect(page).to have_content "Travel Stories by #{User.last.username}"
   end
 
   scenario 'a user can view the new trip page' do
     click_link 'Account'
-    click_link 'Add Trip'
-    expect(page).to have_content "Create a new trip"
+    click_link 'Add a Travel Story'
+    expect(page).to have_content "Create a New Travel Story"
   end
 
   scenario 'a user can create a new trip with a current business' do
     biz = create(:business)
     expect {
       click_link 'Account'
-      click_link 'Add Trip'
+      click_link 'Add a Travel Story'
       fill_in 'Title', with: 'This is my trip to Hawaii'
       fill_in 'Description', with: 'I need...I need...I need... fish fingers and custard! I never know why. I only know who. Come along, Pond! There are fixed points throughout time where things must stay exactly the way they are. This is not one of them. This is an opportunity!'
       check("#{biz.name}")
-      click_button 'Add Trip'
+      click_button 'Add Travel Story'
     }.to change(Trip, :count).by(1)
   end
 
   scenario 'a user can create a new trip with a new business' do
     expect {
       click_link 'Account'
-      click_link 'Add Trip'
+      click_link 'Add a Travel Story'
       fill_in 'Title', with: 'This is my trip to Hawaii'
       fill_in 'Description', with: 'I need...I need...I need... fish fingers and custard! I never know why. I only know who. Come along, Pond! There are fixed points throughout time where things must stay exactly the way they are. This is not one of them. This is an opportunity!'
       fill_in 'Name', with: 'Hula Dog'
-      click_button 'Add Trip'
+      click_button 'Add Travel Story'
     }.to change(Trip, :count).by(1)
   end
 
@@ -64,12 +64,12 @@ feature 'User expectations' do
     expect {
       biz = create(:business)
       click_link 'Account'
-      click_link 'Add Trip'
+      click_link 'Add a Travel Story'
       fill_in 'Title', with: 'This is my trip to Hawaii'
       fill_in 'Description', with: 'I need...I need...I need... fish fingers and custard! I never know why. I only know who. Come along, Pond! There are fixed points throughout time where things must stay exactly the way they are. This is not one of them. This is an opportunity!'
       check("#{biz.name}")
       fill_in 'Name', with: 'Hula Dog'
-      click_button 'Add Trip'
+      click_button 'Add Travel Story'
     }.to change(Trip, :count).by(1)
   end
 

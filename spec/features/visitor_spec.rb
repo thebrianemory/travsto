@@ -4,9 +4,9 @@ feature 'Visitor expectations' do
 
   scenario 'a visitor can view the trips index', js: false do
     visit root_path
-    click_link 'Trips'
+    click_link 'Travel Stories'
     within 'h1' do
-      expect(page).to have_content 'Browse Trips'
+      expect(page).to have_content 'Browse Travel Stories'
     end
   end
 

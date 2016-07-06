@@ -17,7 +17,7 @@
         <% if current_user %>
           <li><%= link_to 'Welcome, ' + current_user.username + '!', user_path(current_user) %></li>
         <% end %>
-        <li><%= link_to 'Trips', trips_path %></li>
+        <li><%= link_to 'Travel Stories', trips_path %></li>
         <% if !current_user %>
         <li><%= link_to 'Log In', new_user_session_path %></li>
           <li><%= link_to 'Sign Up', new_user_registration_path %></li>
@@ -26,8 +26,8 @@
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Account <span class="caret"></span></a>
             <ul class="dropdown-menu">
               <li><%= link_to 'Profile', user_path(current_user) %></li>
-              <li><%= link_to 'My Trips', mytrips_path(current_user) %></li>
-              <li><%= link_to 'Add Trip', new_trip_path %></li>
+              <li><%= link_to 'My Travel Stories', mytrips_path(current_user) %></li>
+              <li><%= link_to 'Add a Travel Story', new_trip_path %></li>
               <li role="separator" class="divider"></li>
               <li><%= link_to 'Log Out', destroy_user_session_path, :method => :delete  %></li>
             </ul>
