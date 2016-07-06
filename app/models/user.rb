@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :username, :email
   validates :username, format: { with: /\A[a-z0-9.]{6,20}\z/i }
   has_many :trips, dependent: :destroy
-  has_many :comments
+  has_many :comments, dependent: :destroy
   enum role: [:user, :admin]
 
   extend FriendlyId
