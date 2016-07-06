@@ -33,32 +33,48 @@ User.create(
   password: 'password',
   password_confirmation: 'password'
 )
+User.create(
+  first_name: "Natasha",
+  last_name: "Romanoff",
+  email: "natasha.romanoffk@example.com",
+  username: "natasharomanoff",
+  password: 'password',
+  password_confirmation: 'password'
+)
+User.create(
+  first_name: "Pepper",
+  last_name: "Potts",
+  email: "pepper.potts@example.com",
+  username: "pepperpotts",
+  password: 'password',
+  password_confirmation: 'password'
+)
 
 ### Businesses ###
-10.times do
+15.times do
   Business.create(
     name: Faker::Company::name
   )
 end
 
 ### Trips ###
-5.times do
+10.times do
   trip = Trip.create(
     title: Faker::Company.catch_phrase,
     description: Faker::Hipster.paragraph + "\n" + Faker::Hipster.paragraph + "\n" + Faker::Hipster.paragraph + "\n" + Faker::Hipster.paragraph,
-    user_id: Faker::Number.between(1, 4)
+    user_id: Faker::Number.between(1, 6)
   )
   3.times do
-    business = Business.find_by_id(Faker::Number.between(1, 10))
+    business = Business.find_by_id(Faker::Number.between(1, 15))
     trip.businesses << business
   end
 end
 
 ### Comments ###
-22.times do
+30.times do
   Comment.create(
     content: Faker::StarWars.quote,
-    user_id: Faker::Number.between(1, 4),
-    trip_id: Faker::Number.between(1, 2)
+    user_id: Faker::Number.between(1, 6),
+    trip_id: Faker::Number.between(1, 10)
   )
 end

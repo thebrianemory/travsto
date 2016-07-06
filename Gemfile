@@ -43,6 +43,7 @@ gem 'omniauth-facebook'
 gem 'devise'
 gem 'pundit'
 gem 'friendly_id', '~> 5.1.0'
+  gem 'faker'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -50,7 +51,6 @@ group :development, :test do
   gem 'pry'
   gem 'rspec-rails'
   gem 'factory_girl_rails'
-  gem 'faker'
 end
 
 group :test do
