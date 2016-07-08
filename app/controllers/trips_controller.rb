@@ -13,8 +13,7 @@ class TripsController < ApplicationController
   end
 
   def create
-    @trip = Trip.new(trip_params)
-    @trip.user = current_user
+    @trip = current_user.trips.build(trip_params)
     authorize_trip
     if @trip.save
       redirect_to trip_path(@trip)
