@@ -89,7 +89,7 @@ RSpec.describe TripsController, type: :controller do
           sign_out :user
           expect {
             post :create, trip: attributes_for(:trip, user_id: @user.id)
-          }.not_to change(Trip, :count)
+          }.to raise_error(NoMethodError)
         end
         it 'saves the new trip in the database' do
           expect {
