@@ -1,7 +1,7 @@
 <div class="container">
   <div class="col-md-8">
     <h2><%= @trip.title %></h2>
-    <p>by <%= link_to @trip.user.username, mytrips_path(@trip.user) %></p>
+    <p>by <%= link_to @trip.user.username, user_trips_path(@trip.user) %></p>
     <p><%= @trip.description %></p>
     <hr>
     <h4>Places I visited</h4>

@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   resources :users, only: [:show], path: 'u' do
     resources :trips, path: 'travelstories'
   end
-  resources :trips, path: 'travelstories'
+  resources :trips, path: 'travelstories', only: [:index]
   # get '/u/:username/travelstories' => 'users#my_trips', as: :mytrips
   root 'welcome#index'
   # The priority is based upon order of creation: first created -> highest priority.
