@@ -1,11 +1,13 @@
 Rails.application.routes.draw do
-  resources :trips, path: 'travelstories'
+  get 'travelstories' => 'trips#index'
   resources :businesses, path: 'biz'
   resources :comments
   devise_for :users, :path => '', :path_names => {:sign_in => 'login', :sign_out => 'logout', :sign_up => 'signup'}, :controllers => { registrations: 'registrations', :omniauth_callbacks => "callbacks" }
   get 'users' => 'users#index'
-  resources :users, only: [:show], path: 'u'
-  get '/u/:username/travelstories' => 'users#my_trips', as: :mytrips
+  resources :users, only: [:show], path: 'u' do
+    resources :trips, path: 'travelstories'
+  end
+  # get '/u/:username/travelstories' => 'users#my_trips', as: :mytrips
   root 'welcome#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

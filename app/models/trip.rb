@@ -22,7 +22,7 @@ class Trip < ActiveRecord::Base
       unless biz_attributes["name"].blank?
         biz_attributes.values.each do |business_attribute|
           business = Business.find_or_create_by(name: biz_attributes.values.first)
-          self.businesses << business
+          self.business_trips.create(business_id: business.id)
         end
       end
     end
