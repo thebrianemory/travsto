@@ -26,6 +26,7 @@
       <%= f.fields_for :businesses, @trip.businesses.build do |biz_fields| %>
         <%= biz_fields.label :name %>
         <%= biz_fields.text_field :name %>
+        <%= biz_fields.collection_select :category, Category.all, :id, :name %>
       <% end %>
     </p>
 

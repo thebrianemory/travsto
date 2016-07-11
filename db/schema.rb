@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160701034815) do
+ActiveRecord::Schema.define(version: 20160704001121) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,13 +28,11 @@ ActiveRecord::Schema.define(version: 20160701034815) do
 
   create_table "businesses", force: :cascade do |t|
     t.string   "name"
-    t.integer  "category_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string   "slug"
   end
 
-  add_index "businesses", ["category_id"], name: "index_businesses_on_category_id", using: :btree
   add_index "businesses", ["slug"], name: "index_businesses_on_slug", unique: true, using: :btree
 
   create_table "categories", force: :cascade do |t|
@@ -112,6 +110,8 @@ ActiveRecord::Schema.define(version: 20160701034815) do
     t.string   "last_name"
     t.integer  "role",                   default: 0
     t.string   "slug"
+    t.string   "provider"
+    t.string   "uid"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
@@ -120,7 +120,6 @@ ActiveRecord::Schema.define(version: 20160701034815) do
 
   add_foreign_key "business_trips", "businesses"
   add_foreign_key "business_trips", "trips"
-  add_foreign_key "businesses", "categories"
   add_foreign_key "comments", "trips"
   add_foreign_key "comments", "users"
   add_foreign_key "reviews", "businesses"
