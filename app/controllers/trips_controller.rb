@@ -4,7 +4,16 @@ class TripsController < ApplicationController
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   def index
-    @trips = Trip.all
+    if params[:user_id]
+      @user = User.friendly.find(params[:user_id])
+      if @user.nil?
+        redirect_to trips_path, alert: "User not found"
+      else
+        @trips = @user.trips
+      end
+    else
+      @trips = Trip.all
+    end
   end
 
   def new

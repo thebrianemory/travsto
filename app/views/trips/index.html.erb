@@ -4,7 +4,7 @@
     <% @trips.each do |trip| %>
       <div class="col-md-12 well well-white">
         <p><span class="trip-title"><%= link_to trip.title, trip_path(trip) %></span> by
-        <%= link_to trip.user.name, mytrips_path(trip.user)  %></p>
+        <%= link_to trip.user.name, trip_path(trip)  %></p>
         <p><%= truncate(trip.description, length: 250) %> <%= link_to "Read More", trip_path(trip) %></p>
       </div>
     <% end %>
