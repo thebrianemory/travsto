@@ -17,8 +17,12 @@ class TripsController < ApplicationController
   end
 
   def new
-    @trip = Trip.new
-    authorize_trip
+    if current_user.username == params[:user_id]
+      @trip = Trip.new
+      authorize_trip
+    else
+      redirect_to user_trips_path(current_user), alert: "You can only create travel stories for yourself"
+    end
   end
 
   def create
