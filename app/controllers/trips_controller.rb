@@ -21,7 +21,7 @@ class TripsController < ApplicationController
       @trip = Trip.new
       authorize_trip
     else
-      redirect_to user_trips_path(current_user), alert: "You can only create travel stories for yourself"
+      redirect_to new_user_trip_path(current_user), alert: "You can only create travel stories for yourself"
     end
   end
 
