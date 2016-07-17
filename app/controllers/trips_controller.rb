@@ -39,8 +39,12 @@ class TripsController < ApplicationController
     if params[:user_id] && params[:id]
       @user = User.friendly.find(params[:user_id])
       @trip = @user.trips.friendly.find(params[:id])
-      if @trip.nil?
-        redirect_to user_trips_path(@user), alert: "Trip not found"
+      if @trip.nil? || @user.nil?
+        redirect_to user_trips_path(@user), alert: "Please check your link and try again"
+      end
+      respond_to do |format|
+        format.html { render :show }
+        format.json { render json: @trip }
       end
     end
   end
