@@ -14,7 +14,7 @@
 //= require jquery_ujs
 //= require bootstrap
 //= require local_time
-//= require_tree .
+//= require_directory .
 
 window.setTimeout(function() {
     $(".alert").remove()

@@ -10,9 +10,17 @@ class TripsController < ApplicationController
         redirect_to trips_path, alert: "User not found"
       else
         @trips = @user.trips
+        respond_to do |format|
+          format.html { render :index }
+          format.json { render json: @trips }
+        end
       end
     else
       @trips = Trip.all
+      respond_to do |format|
+        format.html { render :index }
+        format.json { render json: @trips }
+      end
     end
   end
 
