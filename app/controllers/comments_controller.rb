@@ -18,9 +18,10 @@ class CommentsController < ApplicationController
 
   def create
     @comment = Comment.new(comment_params)
+    @trip = Trip.find_by(id: @comment.trip_id)
     authorize_comment
     if @comment.save
-      redirect_to trip_path(@comment.trip.slug)
+      redirect_to user_trip_path(@trip.user, @trip)
     else
       render :new
     end
