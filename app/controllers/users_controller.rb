@@ -12,9 +12,9 @@ class UsersController < ApplicationController
     authorize @user
   end
 
-  def my_trips
-    @my_trips = @user.trips
-  end
+  # def my_trips
+  #   @my_trips = @user.trips
+  # end
 
   private
   def set_user

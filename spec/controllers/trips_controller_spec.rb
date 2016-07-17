@@ -20,6 +20,10 @@ RSpec.describe TripsController, type: :controller do
         get :index
         expect(response).to render_template :index
       end
+      it "allows viewing of the user's trips" do
+        get :index, id: @user
+        expect(response).to render_template :index
+      end
     end
 
     describe 'GET #show' do

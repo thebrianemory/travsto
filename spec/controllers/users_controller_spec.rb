@@ -48,11 +48,4 @@ RSpec.describe UsersController, type: :controller do
       expect(subject.current_user).to_not eq(nil)
     end
   end
-
-  describe 'GET #trips' do
-    it 'allows the user to view their trips' do
-      get :my_trips, username: @user
-      expect(response).to render_template :my_trips
-    end
-  end
 end
