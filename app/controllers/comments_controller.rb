@@ -21,9 +21,9 @@ class CommentsController < ApplicationController
     @trip = Trip.find_by(id: @comment.trip_id)
     authorize_comment
     if @comment.save
-      redirect_to user_trip_path(@trip.user, @trip)
+      render json: @comment, status: 201
     else
-      render :new
+      render json: { errors: @comment.errors.full_messages }
     end
   end
 

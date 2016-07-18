@@ -17,11 +17,13 @@
     <% else %>
       <%= link_to "You must be logged in to leave a comment.", new_user_session_path %>
     <% end %>
-    <% @trip.comments.each do |comment| %>
-    <div class="<%= cycle('well well-white', 'well') %>">
-      Posted by <strong><%= comment.user.username %></strong> at <strong><%= local_time(comment.created_at) %></strong> <br>
-      <%= comment.content %>
+    <div id="user-comment">
+      <% @trip.comments.each do |comment| %>
+      <div class="well well-white">
+        Posted by <strong><%= comment.user.username %></strong> at <strong><%= local_time(comment.created_at, '%B %e, %Y %l:%M %p') %></strong> <br>
+        <%= comment.content %>
+      </div>
+      <% end %>
     </div>
-    <% end %>
   </div>
 </div>
