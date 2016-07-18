@@ -1,8 +1,8 @@
 $ ->
   errorDiv = undefined
   successDiv = undefined
-  errorDiv = '<div class=\'alert alert-danger alert-devise\'>Comment cannot be blank</div>'
-  successDiv = '<div class=\'alert alert-success alert-devise\'>Your comment has been posted</div>'
+  errorDiv = '<div class=\'alert alert-danger alert-devise\'><button class=\'close\' data-dismiss=\'alert\'>×</button>Comment cannot be blank</div>'
+  successDiv = '<div class=\'alert alert-success alert-devise\'><button class=\'close\' data-dismiss=\'alert\'>×</button>Your comment has been posted</div>'
   $('form').submit (event) ->
     posting = undefined
     values = undefined
