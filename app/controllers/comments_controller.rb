@@ -28,14 +28,14 @@ class CommentsController < ApplicationController
   end
 
   def edit
-    render partial: "trips/comment_form"
+    render :edit, layout: false
   end
 
   def update
     if @comment.update(comment_params)
-      redirect_to trip_path(@comment.trip.slug)
+      render json: @comment, status: 201
     else
-      render :edit
+      render json: { errors: @comment.errors.full_messages }
     end
   end
 

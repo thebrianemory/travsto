@@ -3,13 +3,13 @@
 <% end %>
 
 <div id="#commentForm">
-  <%= form_for Comment.new do |f| %>
+  <%= form_for @comment do |f| %>
   <div id="alert_explanation">
   </div>
     <p><%= f.label :content, "Leave a comment" %>
       <%= f.text_area :content, rows: 5, class: 'form-control' %></p>
       <%= f.hidden_field :user_id, value: current_user.id %>
       <%= f.hidden_field :trip_id, value: @trip.id %>
-    <p><%= f.submit "Add Comment", class: 'btn btn-sm btn-primary' %></p>
+    <p><%= f.submit "Add comment", class: 'btn btn-sm btn-primary' %></p>
   <% end %>
 </div>

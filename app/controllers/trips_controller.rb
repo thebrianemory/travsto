@@ -44,6 +44,7 @@ class TripsController < ApplicationController
   end
 
   def show
+    @comment = Comment.new
     if params[:user_id] && params[:id]
       @user = User.friendly.find(params[:user_id])
       @trip = @user.trips.friendly.find(params[:id])
