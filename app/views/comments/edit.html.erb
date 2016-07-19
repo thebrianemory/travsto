@@ -23,11 +23,13 @@ $(function() {
       } else {
         commentEdit = data['comment'];
         timeCreated = moment(commentEdit.created_at).format('LLL');
+        timeUpdated = moment(commentEdit.updated_at).format('LLL')
         commentTextEdit = 'Posted by <strong>';
         commentTextEdit += commentEdit.user.username + '</strong> at ';
         commentTextEdit += '<strong>' + timeCreated + '</strong>';
         commentTextEdit += ' <br>' + commentEdit.content;
         commentTextEdit += '<br /><br /><button class="btn btn-xs btn-info jsNewEdit" data-id="' + commentIdEdit + '">Edit comment</button>';
+        commentTextEdit += ' <small>Last updated: ' + timeUpdated + '</small>'
         $('#comment-' + commentIdEdit).html(commentTextEdit);
         $('.jsNewEdit').on('click', function() {
           var commentIdEdit;

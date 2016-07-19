@@ -23,10 +23,13 @@
       <div class="well well-white" id="comment-<%= comment.id %>">
         Posted by <strong><%= comment.user.username %></strong> at <strong><%= local_time(comment.created_at, '%B %e, %Y %l:%M %p') %></strong> <br>
         <%= comment.content %>
-        <br>
-        <br>
         <% if current_user.id == comment.user.id %>
+          <br>
+          <br>
           <button class="btn btn-xs btn-info js-edit" data-id="<%= comment.id %>">Edit comment</button>
+        <% end %>
+        <% if comment.updated_at != comment.created_at %>
+          <small>Last updated: <%= local_time(comment.updated_at, '%B %e, %Y %l:%M %p') %></small>
         <% end %>
       </div>
       <% end %>
