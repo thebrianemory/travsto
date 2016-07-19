@@ -19,7 +19,7 @@
       <%= link_to "You must be logged in to leave a comment.", new_user_session_path %>
     <% end %>
     <div id="user-comment">
-      <% @trip.comments.each do |comment| %>
+      <% @trip_comments.each do |comment| %>
       <div class="well well-white" id="comment-<%= comment.id %>">
         Posted by <strong><%= comment.user.username %></strong> at <strong><%= local_time(comment.created_at, '%B %e, %Y %l:%M %p') %></strong> <br>
         <%= comment.content %>

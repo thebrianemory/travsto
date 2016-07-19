@@ -48,6 +48,7 @@ class TripsController < ApplicationController
     if params[:user_id] && params[:id]
       @user = User.friendly.find(params[:user_id])
       @trip = @user.trips.friendly.find(params[:id])
+      @trip_comments = @trip.comments.order('created_at')
       if @trip.nil? || @user.nil?
         redirect_to user_trips_path(@user), alert: "Please check your link and try again"
       end
