@@ -1,7 +1,3 @@
-<% content_for :head do %>
-  <%= javascript_include_tag "trip_comments/trip_comments" %>
-<% end %>
-
 <div id="#editCommentForm">
   <%= form_for @comment, remote: true, html: { style: "display:inline;" }, data: { id: @comment.id } do |f| %>
   <div id="alert_explanation">
@@ -14,29 +10,30 @@
 
 <script type="text/javascript" charset="utf-8">
 $(function() {
-  $('form').submit(function(event) {
-    var commentId = parseInt($(this).attr('data-id'));
-    var posting, values;
-    posting = void 0;
-    values = void 0;
+  $('form.edit_comment').submit(function(event) {
+    var commentIdEdit, postingEdit, valuesEdit;
+    commentIdEdit = parseInt($(this).attr('data-id'));
     event.preventDefault();
-    values = $(this).serialize();
-    posting = $.post('/comments/' + commentId, values);
-    posting.done(function(data) {
-      var comment, commentText, timeCreated;
-      comment = void 0;
-      commentText = void 0;
-      timeCreated = void 0;
+    valuesEdit = $(this).serialize();
+    postingEdit = $.post('/comments/' + commentIdEdit, valuesEdit);
+    postingEdit.done(function(data) {
+      var commentEdit, commentTextEdit, timeCreated;
       if (data['errors'] !== void 0) {
         $('#alert_explanation').append(errorDiv);
       } else {
-        comment = data['comment'];
-        timeCreated = moment(comment.created_at).format('LLL');
-        commentText = 'Posted by <strong>';
-        commentText += comment.user.username + '</strong> at ';
-        commentText += '<strong>' + timeCreated + '</strong>';
-        commentText += ' <br>' + comment.content;
-        $('#comment-' + commentId).html(commentText);
+        commentEdit = data['comment'];
+        timeCreated = moment(commentEdit.created_at).format('LLL');
+        commentTextEdit = 'Posted by <strong>';
+        commentTextEdit += commentEdit.user.username + '</strong> at ';
+        commentTextEdit += '<strong>' + timeCreated + '</strong>';
+        commentTextEdit += ' <br>' + commentEdit.content;
+        commentTextEdit += '<br /><br /><button class="btn btn-xs btn-info jsNewEdit" data-id="' + commentIdEdit + '">Edit comment</button>';
+        $('#comment-' + commentIdEdit).html(commentTextEdit);
+        $('.jsNewEdit').on('click', function() {
+          var commentIdEdit;
+          commentIdEdit = parseInt($(this).attr('data-id'));
+          $('#comment-' + commentIdEdit).load('/comments/' + commentIdEdit + '/edit');
+        });
       }
     });
   });

@@ -21,7 +21,9 @@ $ ->
         commentText = '<div class=\'well well-white\'>Posted by <strong>'
         commentText += comment.user.username + '</strong> at '
         commentText += '<strong>' + timeCreated + '</strong>'
-        commentText += ' <br>' + comment.content + '</div>'
+        commentText += ' <br>' + comment.content
+        commentText += '<br /><br /><button class="btn btn-xs btn-info js-edit" data-id="' + comment.id + '">Edit comment</button>'
+        commentText += '</div>'
         $('#user-comment').append commentText
         $('form textarea').val ''
         $('#alert_explanation').append successDiv
@@ -32,8 +34,8 @@ $ ->
 
 $ ->
   $('.js-edit').on 'click', ->
-    commentId = parseInt($(this).attr('data-id'))
-    $('#comment-' + commentId).load '/comments/' + commentId + '/edit'
+    commentIdEdit = parseInt($(this).attr('data-id'))
+    $('#comment-' + commentIdEdit).load '/comments/' + commentIdEdit + '/edit'
     return
   return
 
