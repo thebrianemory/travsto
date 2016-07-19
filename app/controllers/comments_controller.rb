@@ -28,6 +28,7 @@ class CommentsController < ApplicationController
   end
 
   def edit
+    render partial: "trips/comment_form"
   end
 
   def update

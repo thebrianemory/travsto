@@ -1,7 +1,7 @@
 <div class="container">
   <div class="col-md-8">
     <h2><%= @trip.title %></h2>
-    <p>by <%= link_to @trip.user.username, user_trips_path(@trip.user) %></p>
+    <p>by<%= link_to @trip.user.username, user_trips_path(@trip.user) %></p>
     <p><%= @trip.description %></p>
     <hr>
     <h4>Places I visited</h4>
@@ -10,20 +10,34 @@
         <li><%= biz.name %></li>
       </ul>
     <% end %>
+    <hr>
   </div>
   <div id="comments" class="well col-md-6">
     <% if current_user %>
-      <%= render partial: 'new_comment' %>
+      <%= render partial: 'comment_form' %>
     <% else %>
       <%= link_to "You must be logged in to leave a comment.", new_user_session_path %>
     <% end %>
     <div id="user-comment">
       <% @trip.comments.each do |comment| %>
-      <div class="well well-white">
+      <div class="well well-white" id="comment-<%= comment.id %>">
         Posted by <strong><%= comment.user.username %></strong> at <strong><%= local_time(comment.created_at, '%B %e, %Y %l:%M %p') %></strong> <br>
         <%= comment.content %>
+        <br>
+        <br>
+        <button class="btn btn-xs btn-info js-edit" data-id="<%= comment.id %>">Edit comment</button>
       </div>
       <% end %>
     </div>
   </div>
 </div>
+
+
+<script type="text/javascript" charset="utf-8">
+$(function () {
+  $(".js-edit").on("click", function() {
+    var commentId = parseInt($(this).attr("data-id"));
+
+  });
+});
+</script>
