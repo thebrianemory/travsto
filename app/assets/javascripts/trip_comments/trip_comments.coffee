@@ -18,13 +18,17 @@ $ ->
       else
         comment = data['comment']
         timeCreated = moment(comment.created_at).format('LLL')
-        commentText = '<div class=\'well well-white\'>Posted by <strong>'
+        commentText = '<div class=\'well well-white\' id=\'comment-' + comment.id + '\'>Posted by <strong>'
         commentText += comment.user.username + '</strong> at '
         commentText += '<strong>' + timeCreated + '</strong>'
         commentText += ' <br>' + comment.content
-        commentText += '<br /><br /><button class="btn btn-xs btn-info js-edit" data-id="' + comment.id + '">Edit comment</button>'
+        commentText += '<br /><br /><button class="btn btn-xs btn-info jsNew" data-id="' + comment.id + '">Edit comment</button>'
         commentText += '</div>'
         $('#user-comment').append commentText
+        $('.jsNew').on 'click', ->
+          commentIdEdit = parseInt($(this).attr('data-id'))
+          $('#comment-' + commentIdEdit).load '/comments/' + commentIdEdit + '/edit'
+          return
         $('form textarea').val ''
         $('#alert_explanation').append successDiv
       return
