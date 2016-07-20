@@ -15,6 +15,10 @@ $ ->
       timeCreated = undefined
       if data['errors'] != undefined
         $('#alert_explanation').append errorDiv
+        window.setTimeout (->
+          $('.alert').remove()
+          return
+        ), 3000
       else
         comment = data['comment']
         timeCreated = moment(comment.created_at).format('LLL')
@@ -31,6 +35,10 @@ $ ->
           return
         $('form textarea').val ''
         $('#alert_explanation').append successDiv
+        window.setTimeout (->
+          $('.alert').remove()
+          return
+        ), 3000
       return
     return
   return
