@@ -1,5 +1,5 @@
 <div id="#editCommentForm">
-  <%= form_for @comment, remote: true, html: { style: "display:inline;" }, data: { id: @comment.id } do |f| %>
+  <%= form_for @comment, data: { id: @comment.id } do |f| %>
   <div id="alert_explanation">
   </div>
     <p><%= f.label :content, "Edit comment" %>
