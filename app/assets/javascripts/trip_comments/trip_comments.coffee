@@ -1,18 +1,11 @@
 $ ->
-  errorDiv = undefined
-  successDiv = undefined
   errorDiv = '<div class=\'alert alert-danger alert-devise\'><button class=\'close\' data-dismiss=\'alert\'>×</button>Comment cannot be blank</div>'
   successDiv = '<div class=\'alert alert-success alert-devise\'><button class=\'close\' data-dismiss=\'alert\'>×</button>Your comment has been posted</div>'
   $('form').submit (event) ->
-    posting = undefined
-    values = undefined
     event.preventDefault()
     values = $(this).serialize()
     posting = $.post('/comments', values)
     posting.done (data) ->
-      comment = undefined
-      commentText = undefined
-      timeCreated = undefined
       if data['errors'] != undefined
         $('#alert_explanation').append errorDiv
         window.setTimeout (->

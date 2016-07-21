@@ -1,15 +1,8 @@
 <div class="container">
   <div class="col-md-8">
-    <h2><%= @trip.title %></h2>
-    <p>by <%= link_to @trip.user.username, user_trips_path(@trip.user) %></p>
-    <p><%= @trip.description %></p>
-    <hr>
-    <h4>Places I visited</h4>
-    <% @trip.businesses.each do |biz| %>
-      <ul>
-        <li><%= biz.name %></li>
-      </ul>
-    <% end %>
+    <div class="tripShowInfo" data-id="<%= @trip.slug %>" data-name="<%= @trip.user.username %>">
+      
+    </div>
     <hr>
   </div>
   <div id="comments" class="well col-md-6">
