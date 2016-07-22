@@ -30,7 +30,7 @@ $(function() {
     biz = trip.businesses;
     user = new TripUser(trip.user.slug, trip.user.first_name, trip.user.last_name);
     tripText = '<h2>' + trip.title + '</h2>';
-    tripText += '<p>by <a href=\'/u/' + username + '\'>' + user.fullName() + '</a></p>';
+    tripText += '<p>by <a href=\'/u/' + username + '/travelstories\'>' + user.fullName() + '</a></p>';
     tripText += '<p>' + trip.description + '</p>';
     tripText += '<hr><h4>Places I visited</h4>';
     tripText += '<ul>';
