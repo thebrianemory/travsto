@@ -2,7 +2,8 @@ require 'rails_helper'
 
 feature 'User expectations' do
   before(:each) do
-    sign_in create(:user)
+    @user = create(:user)
+    sign_in @user
     visit root_path
   end
 
@@ -73,25 +74,14 @@ feature 'User expectations' do
     }.to change(Trip, :count).by(1)
   end
 
-  scenario "a user can see a trip's title, description, and places visited" do
-    trip = create(:trip)
-    trip.businesses << create(:business)
-    trip.businesses << create(:business)
-    visit trip_path(trip)
-    expect(page).to have_content trip.title
-    expect(page).to have_content trip.description
-    expect(Business.count).to eq 2
-    expect(page).to have_content trip.businesses.first.name
-    expect(page).to have_content trip.businesses.last.name
-  end
-
   scenario "a user can add a comment" do
     trip = create(:trip)
+    user = User.find(trip.user_id)
     trip.businesses << create(:business)
     trip.businesses << create(:business)
-    visit trip_path(trip)
+    visit user_trip_path(user, trip)
     fill_in 'Leave a comment', with: 'This is really cool'
-    click_button 'Add Comment'
+    click_button 'Add comment'
     expect(trip.comments.count).to eq 1
   end
 end
