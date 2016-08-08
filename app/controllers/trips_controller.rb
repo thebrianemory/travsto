@@ -25,7 +25,9 @@ class TripsController < ApplicationController
   end
 
   def new
-    if current_user.username == params[:user_id]
+    if !current_user
+      redirect_to new_user_session_path, alert: "You must be logged in to create a travel story"
+    elsif current_user.username == params[:user_id]
       @trip = Trip.new
       authorize_trip
     else
