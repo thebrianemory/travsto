@@ -91,10 +91,6 @@ RSpec.describe CommentsController, type: :controller do
             post :create, comment: attributes_for(:comment, user_id: @user.id, trip_id: @trip.id)
           }.to change(Comment, :count).by(1)
         end
-        it 'redirects to comment#show' do
-          post :create, comment: attributes_for(:comment, user_id: @user.id, trip_id: @trip.id)
-          expect(response).to redirect_to trip_path(assigns[:comment].trip.slug)
-        end
       end
 
       context 'with invalid attributes' do
@@ -102,10 +98,6 @@ RSpec.describe CommentsController, type: :controller do
           expect {
             post :create, comment: attributes_for(:invalid_comment)
           }.not_to change(Comment, :count)
-        end
-        it 're-renders the :new template' do
-          post :create, comment: attributes_for(:invalid_comment)
-          expect(response).to render_template :new
         end
       end
     end
@@ -134,10 +126,6 @@ RSpec.describe CommentsController, type: :controller do
           @comment.reload
           expect(@comment.content).to eq("This is lame.")
         end
-        it "redirectes to the updated comment" do
-          patch :update, id: @comment, comment: attributes_for(:comment)
-          expect(response).to redirect_to trip_path(@comment.trip.slug)
-        end
       end
 
       context 'with invalid attributes' do
@@ -146,10 +134,6 @@ RSpec.describe CommentsController, type: :controller do
           patch :update, id: @comment, comment: attributes_for(:invalid_comment)
           @comment.reload
           expect(@comment.content).to eq(com_content)
-        end
-        it 're-renders the :edit template' do
-          patch :update, id: @comment, comment: attributes_for(:invalid_comment)
-          expect(response).to render_template :edit
         end
       end
     end
@@ -167,16 +151,6 @@ RSpec.describe CommentsController, type: :controller do
         expect {
           delete :destroy, id: @comment
         }.not_to change(Comment, :count)
-      end
-      it 'deletes the comment' do
-        expect {
-          delete :destroy, id: @comment
-        }.to change(Comment, :count).by(-1)
-      end
-      it "redirects to comment's trip" do
-        trip = Trip.find_by_id(@comment.trip_id)
-        delete :destroy, id: @comment
-        expect(response).to redirect_to trip_path(trip)
       end
     end
   end
