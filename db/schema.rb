@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160704001121) do
+ActiveRecord::Schema.define(version: 20160822191805) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -59,13 +59,45 @@ ActiveRecord::Schema.define(version: 20160704001121) do
   add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id", using: :btree
   add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
 
+  create_table "images", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "photos", force: :cascade do |t|
+    t.integer  "trip_id"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+  end
+
+  add_index "photos", ["trip_id"], name: "index_photos_on_trip_id", using: :btree
+
+  create_table "trip_images", force: :cascade do |t|
+    t.integer  "trip_id"
+    t.integer  "image_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "trip_images", ["image_id"], name: "index_trip_images_on_image_id", using: :btree
+  add_index "trip_images", ["trip_id"], name: "index_trip_images_on_trip_id", using: :btree
+
   create_table "trips", force: :cascade do |t|
     t.string   "title"
     t.string   "description"
     t.integer  "user_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
     t.string   "slug"
+    t.string   "images_file_name"
+    t.string   "images_content_type"
+    t.integer  "images_file_size"
+    t.datetime "images_updated_at"
+    t.json     "images"
   end
 
   add_index "trips", ["slug"], name: "index_trips_on_slug", unique: true, using: :btree
@@ -101,5 +133,8 @@ ActiveRecord::Schema.define(version: 20160704001121) do
   add_foreign_key "business_trips", "trips"
   add_foreign_key "comments", "trips"
   add_foreign_key "comments", "users"
+  add_foreign_key "photos", "trips"
+  add_foreign_key "trip_images", "images"
+  add_foreign_key "trip_images", "trips"
   add_foreign_key "trips", "users"
 end
