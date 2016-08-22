@@ -7,6 +7,11 @@
     <div class="tripShowInfo" data-id="<%= @trip.slug %>" data-name="<%= @trip.user.username %>">
 
     </div>
+    <% if @trip.images %>
+      <% @trip.images.each do |image| %>
+        <p><img src="<%= image.url %>" class="img-responsive"></p>
+      <% end %>
+    <% end %>
     <hr>
   </div>
   <div id="comments" class="well col-md-6">
