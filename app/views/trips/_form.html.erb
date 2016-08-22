@@ -30,6 +30,10 @@
       <button type="button" id="addNewChoice" class="btn btn-xs btn-success">Add another</button>
     </p>
 
+    <p>
+      <%= f.file_field :images, multiple: true %>
+    </p>
+
   <p><%= f.submit 'Add Travel Story', class: 'btn btn-primary' %></p>
 
   <div style="display: none;" id="new_choice_form">
