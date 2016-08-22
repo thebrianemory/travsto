@@ -6,6 +6,7 @@ class Trip < ActiveRecord::Base
   validates_presence_of :title, :description, :user_id
   validates :title, length: 5..50
   validates :description, length: { minimum: 100 }
+  mount_uploaders :images, ImageUploader
 
   extend FriendlyId
   friendly_id :title, use: :slugged
