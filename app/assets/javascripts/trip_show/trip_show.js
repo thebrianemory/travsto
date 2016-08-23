@@ -60,7 +60,7 @@ $(document).ready(function() {
     itemsTablet: [768,1],
     itemsTabletSmall: false,
     itemsMobile : [479,1],
-    singleItem : false,
+    singleItem : true,
     itemsScaleUp : false,
 
     //Basic Speeds
@@ -73,7 +73,7 @@ $(document).ready(function() {
     stopOnHover : false,
 
     // Navigation
-    navigation : false,
+    navigation : true,
     navigationText : ["prev","next"],
     rewindNav : true,
     scrollPerPage : false,
@@ -97,7 +97,7 @@ $(document).ready(function() {
     lazyEffect : "fade",
 
     //Auto height
-    autoHeight : false,
+    autoHeight : true,
 
     //JSON
     jsonPath : false,
