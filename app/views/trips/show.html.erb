@@ -9,7 +9,11 @@
     </div>
     <!-- trip image carousel -->
     <div id="owl-example" class="owl-carousel">
-      <div> Your Content </div>
+      <% if @trip.images %>
+        <% @trip.images.each do |image| %>
+          <p><img src="<%= image.url %>" class="img-responsive"></p>
+        <% end %>
+      <% end %>
     </div>
     <hr>
   </div>

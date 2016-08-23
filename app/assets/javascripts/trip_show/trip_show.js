@@ -53,11 +53,11 @@ $(document).ready(function() {
   $("#owl-example").owlCarousel({
 
     // Most important owl features
-    items : 5,
+    items : 1,
     itemsCustom : false,
-    itemsDesktop : [1199,4],
-    itemsDesktopSmall : [980,3],
-    itemsTablet: [768,2],
+    itemsDesktop : [1199,1],
+    itemsDesktopSmall : [980,1],
+    itemsTablet: [768,1],
     itemsTabletSmall: false,
     itemsMobile : [479,1],
     singleItem : false,
