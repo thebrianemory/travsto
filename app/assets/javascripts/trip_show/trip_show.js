@@ -47,3 +47,9 @@ $(function() {
 TripUser.prototype.fullName = function() {
   return this.first_name + ' ' + this.last_name;
 };
+
+$(document).ready(function() {
+
+  $("#owl-example").owlCarousel();
+
+});
