@@ -12,7 +12,7 @@
     <div id="owl-example" class="owl-carousel">
       <% if @trip.images %>
         <% @trip.images.each do |image| %>
-          <p><img src="<%= image.url %>" class="img-responsive"></p>
+          <p><img src="<%= image.url %>" class="img-responsive img-carousel"></p>
         <% end %>
       <% end %>
     </div>
